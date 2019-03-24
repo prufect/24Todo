@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     let listHeaderView = UIView()
     var listView: ListView!
     let stackView = UIStackView()
+    var stackViewLocation: CGPoint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,13 +44,14 @@ class ViewController: UIViewController {
     }
     
     fileprivate func setupStackView() {
-        stackView.frame = CGRect(x: 0, y: 400, width: view.frame.width, height: view.frame.height)
+        stackView.frame = CGRect(x: 0, y: view.frame.height*0.75, width: view.frame.width, height: view.frame.height)
         stackView.axis = .vertical
         
         stackView.addArrangedSubview(listHeaderView)
         stackView.addArrangedSubview(listView)
         
         view.addSubview(stackView)
+        
     }
     
     fileprivate func setupGestureRecognizers() {
@@ -60,13 +62,14 @@ class ViewController: UIViewController {
     fileprivate func handlePanGesture(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
         case .began:
+            stackViewLocation = stackView.center
             print("Pan Began")
             break
         case .changed:
             handlePanChanged(gesture: gesture)
             break
         case .ended:
-            handlePanEnded(gesture: gesture)
+            //handlePanEnded(gesture: gesture)
             break
         default:
             break
@@ -77,13 +80,13 @@ class ViewController: UIViewController {
         let translation = gesture.translation(in: view)
         print("Y: ", translation.y)
         
-        stackView.transform = CGAffineTransform(translationX: 0, y: translation.y)
+        stackView.center = CGPoint(x: stackViewLocation.x, y: stackViewLocation.y + translation.y)
     }
     
     fileprivate func handlePanEnded(gesture: UIPanGestureRecognizer) {
        
         UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
             self.stackView.transform = .identity
-        }, completion: nil)        
+        }, completion: nil)
     }
 }
