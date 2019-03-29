@@ -103,15 +103,15 @@
 		A44F7EDC224468D800E48FE9 /* 24Todo */ = {
 			isa = PBXGroup;
 			children = (
+				A471E019224EE10400AA30B0 /* Models */,
+				A471E018224EE10100AA30B0 /* Views */,
+				A471E017224EE0FC00AA30B0 /* Controllers */,
 				A44F7EDD224468D800E48FE9 /* AppDelegate.swift */,
-				A44F7EDF224468D800E48FE9 /* ViewController.swift */,
-				A44F7F0E22446A0B00E48FE9 /* ListView.swift */,
 				A44F7EE1224468D800E48FE9 /* Main.storyboard */,
 				A44F7EE7224468D800E48FE9 /* Assets.xcassets */,
 				A44F7EE9224468D800E48FE9 /* LaunchScreen.storyboard */,
 				A44F7EEC224468D800E48FE9 /* Info.plist */,
 				A44F7EE4224468D800E48FE9 /* _4Todo.xcdatamodeld */,
-				A471E015224ECC0700AA30B0 /* Item.swift */,
 			);
 			path = 24Todo;
 			sourceTree = "<group>";
@@ -132,6 +132,30 @@
 				A44F7F02224468D800E48FE9 /* Info.plist */,
 			);
 			path = 24TodoUITests;
+			sourceTree = "<group>";
+		};
+		A471E017224EE0FC00AA30B0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A44F7EDF224468D800E48FE9 /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		A471E018224EE10100AA30B0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A44F7F0E22446A0B00E48FE9 /* ListView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A471E019224EE10400AA30B0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A471E015224ECC0700AA30B0 /* Item.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

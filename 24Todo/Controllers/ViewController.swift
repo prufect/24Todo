@@ -79,7 +79,17 @@ extension ViewController {
 // MARK:- Setup Functions
 extension ViewController {
     fileprivate func setupView() {
-        view.backgroundColor = .green
+        view.backgroundColor = .white
+        
+        setupNavBar()
+    }
+    
+    fileprivate func setupNavBar() {
+        navigationItem.title = "Today"
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor : UIColor.black]
     }
     
     fileprivate func setupListView() {
@@ -111,7 +121,7 @@ extension ViewController {
     }
     
     fileprivate func setupGestureRecognizers() {
-        listHeaderView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture)))
+        listStackView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture)))
     }
     
     fileprivate func setupNotificationObservers() {
