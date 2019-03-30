@@ -20,12 +20,37 @@ class ViewController: UIViewController {
         setupView()
         setupListView()
         setupGestureRecognizers()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         setupNotificationObservers()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        removeNotificationObservers()
+    }
+    
+    func createItemView(ofItem item: Item, withFrame frame: CGRect) {
+        let itemFrame = CGRect(x: listView.frame.minX + frame.minX, y: listView.frame.minY + frame.maxY, width: frame.width, height: frame.height)
+        let itemView = ItemView(frame: itemFrame, item: item)
+        view.addSubview(itemView)
     }
 }
 
 // MARK: - HandleFunctions
 extension ViewController {
+    
+    @objc fileprivate func handleDidLongPressOnCell(notification: Notification) {
+        guard let userInfo = notification.userInfo else {return}
+        let item = userInfo["item"] as! Item
+        let frame = userInfo["frame"] as! CGRect
+        createItemView(ofItem: item, withFrame: frame)
+    }
+    
     @objc fileprivate func handlePanGesture(gesture: UIPanGestureRecognizer) {
         
         switch gesture.state {
@@ -45,7 +70,6 @@ extension ViewController {
     
     fileprivate func handlePanBegan(gesture: UIPanGestureRecognizer) {
         listViewOriginalCenter = listView.center
-
         listView.updateForDisconnect()
     }
     
@@ -144,5 +168,12 @@ extension ViewController {
     fileprivate func setupNotificationObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleDidLongPressOnCell), name: Notification.Name.didLongPressOnCell, object: nil)
+    }
+    
+    fileprivate func removeNotificationObservers() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.didLongPressOnCell, object: nil)
     }
 }
