@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     
     var listView: ListView!
     var listViewOriginalCenter: CGPoint!
+    var totalTransformation: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,31 +30,72 @@ extension ViewController {
         
         switch gesture.state {
         case .began:
-            listViewOriginalCenter = listView.center
+            handlePanBegan(gesture: gesture)
             break
         case .changed:
             handlePanChanged(gesture: gesture)
             break
         case .ended:
-            //handlePanEnded(gesture: gesture)
+            handlePanEnded(gesture: gesture)
             break
         default:
             break
         }
     }
     
+    fileprivate func handlePanBegan(gesture: UIPanGestureRecognizer) {
+        listViewOriginalCenter = listView.center
+
+        listView.updateForDisconnect()
+    }
+    
     fileprivate func handlePanChanged(gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: view)
         listView.center = CGPoint(x: listViewOriginalCenter.x, y: listViewOriginalCenter.y + translation.y)
-        
         //print("Y: ", translation.y)
         //print(stackView.frame.minY)
     }
     
     fileprivate func handlePanEnded(gesture: UIPanGestureRecognizer) {
-        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
-            self.listView.transform = .identity
-        }, completion: nil)
+        
+        let velocity = gesture.velocity(in: view).y
+        
+        listViewOriginalCenter = listView.center
+        guard let navBarHeight = navigationController?.navigationBar.frame.maxY else { return }
+        let leeway: CGFloat = 50
+        let listViewHeight = listView.frame.minY
+        
+        //print(listViewHeight, navBarHeight)
+        
+        // If close to top then combine
+        if listViewHeight < navBarHeight + leeway || velocity < -1500{
+            let distanceToTop = listViewHeight - navBarHeight
+            //print("Move: ", distanceToTop)
+            
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
+                // Position at top
+                self.listView.center = CGPoint(x: self.listViewOriginalCenter.x, y: self.listViewOriginalCenter.y - distanceToTop)
+                
+                // Remove Corner Radius
+                self.listView.updateForConnect()
+                
+            }, completion: nil)
+        }
+        
+        let bottomBarrier: CGFloat = 60
+        let bottomLeeway: CGFloat = 50
+        
+        if listViewHeight > (view.frame.height - bottomBarrier) - bottomLeeway  || velocity > 1500{
+            let distanceToBottom = (view.frame.height - bottomBarrier) - listViewHeight
+            //print("Move: ", distanceToBottom)
+            
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
+                self.listView.center = CGPoint(x: self.listViewOriginalCenter.x, y: self.listViewOriginalCenter.y + distanceToBottom)
+                
+            }, completion: nil)
+        }
+        
+        // If close to bottom then
     }
     
     @objc fileprivate func handleKeyboardShow(notification: Notification) {
@@ -91,10 +133,6 @@ extension ViewController {
     }
     
     fileprivate func setupListView() {
-        setupListTableView()
-    }
-    
-    fileprivate func setupListTableView() {
         listView = ListView(frame: CGRect(x: 0, y: view.frame.height*0.75, width: view.frame.width, height: view.frame.height))
         view.addSubview(listView)
     }

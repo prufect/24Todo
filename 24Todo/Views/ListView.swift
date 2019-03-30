@@ -26,6 +26,19 @@ class ListView: UIView, UITableViewDelegate, UITableViewDataSource, UISearchBarD
         setupTableView(frame)
         setupIndicator()
     }
+    
+    func updateForConnect() {
+        searchBar.clipsToBounds = false
+        indicator.alpha = 0
+    }
+    
+    func updateForDisconnect() {
+        if indicator.alpha != 1 {
+            UIView.animate(withDuration: 0.2) {
+                self.indicator.alpha = 1
+            }
+        }
+    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -80,12 +93,30 @@ extension ListView {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ItemCell
         
         let item = filteredItems[indexPath.row]
-        cell.textLabel?.text = item.title
+        cell.item = item
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let itemToRemove = filteredItems[indexPath.row]
+            items.removeAll { (item) -> Bool in
+                item.title == itemToRemove.title
+            }
+            filteredItems.remove(at: indexPath.row)
+            
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        } else if editingStyle == .insert {
+            print("Insert")
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
 }
 
@@ -127,7 +158,8 @@ extension ListView {
 
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(ItemCell.self, forCellReuseIdentifier: "cell")
+        tableView.tableFooterView = UIView()
         
         addSubview(tableView)
         
@@ -142,6 +174,7 @@ extension ListView {
         items.append(Item(title: "Do Laundry"))
         items.append(Item(title: "Finish App"))
         items.append(Item(title: "Walk the Dog"))
+        items.append(Item(title: "Take notes at Meeting", startTime: Date(), length: 60))
     }
     
     fileprivate func setupIndicator() {

@@ -10,4 +10,12 @@ import Foundation
 
 struct Item {
     let title: String
+    let startTime: Date?
+    let length: Int?
+    
+    init(title: String, startTime: Date? = nil, length: Int? = nil) {
+        self.title = title
+        self.startTime = startTime
+        self.length = length
+    }
 }

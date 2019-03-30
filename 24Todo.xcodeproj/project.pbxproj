@@ -17,6 +17,7 @@
 		A44F7F01224468D800E48FE9 /* _4TodoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44F7F00224468D800E48FE9 /* _4TodoUITests.swift */; };
 		A44F7F0F22446A0B00E48FE9 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44F7F0E22446A0B00E48FE9 /* ListView.swift */; };
 		A471E016224ECC0700AA30B0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = A471E015224ECC0700AA30B0 /* Item.swift */; };
+		A471E01B224F055A00AA30B0 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A471E01A224F055A00AA30B0 /* ItemCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		A44F7F02224468D800E48FE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A44F7F0E22446A0B00E48FE9 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		A471E015224ECC0700AA30B0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		A471E01A224F055A00AA30B0 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				A44F7F0E22446A0B00E48FE9 /* ListView.swift */,
+				A471E01A224F055A00AA30B0 /* ItemCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 			files = (
 				A471E016224ECC0700AA30B0 /* Item.swift in Sources */,
 				A44F7F0F22446A0B00E48FE9 /* ListView.swift in Sources */,
+				A471E01B224F055A00AA30B0 /* ItemCell.swift in Sources */,
 				A44F7EE6224468D800E48FE9 /* _4Todo.xcdatamodeld in Sources */,
 				A44F7EE0224468D800E48FE9 /* ViewController.swift in Sources */,
 				A44F7EDE224468D800E48FE9 /* AppDelegate.swift in Sources */,
