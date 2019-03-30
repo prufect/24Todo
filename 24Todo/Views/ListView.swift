@@ -12,6 +12,7 @@ class ListView: UIView, UITableViewDelegate, UITableViewDataSource, UISearchBarD
     var items = [Item]()
     var filteredItems = [Item]()
     
+    let indicator = UIView()
     let searchBar = UISearchBar()
     let tableView = UITableView()
     
@@ -20,8 +21,10 @@ class ListView: UIView, UITableViewDelegate, UITableViewDataSource, UISearchBarD
         
         setupDummyItems()
 
+        setupView()
         setupSearchBar()
         setupTableView(frame)
+        setupIndicator()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -89,6 +92,14 @@ extension ListView {
 
 //MARK:- Setup Functions
 extension ListView {
+    
+    fileprivate func setupView() {
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize.zero
+        layer.shadowRadius = 3
+    }
+    
     fileprivate func setupSearchBar() {
         searchBar.placeholder = "Search for or Create an Item"
         searchBar.searchBarStyle = .default
@@ -97,6 +108,10 @@ extension ListView {
         searchBar.backgroundImage = UIImage()
         searchBar.delegate = self
         searchBar.returnKeyType = .go
+        
+        searchBar.layer.cornerRadius = 8
+        searchBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        searchBar.clipsToBounds = true
         
         addSubview(searchBar)
         
@@ -127,5 +142,18 @@ extension ListView {
         items.append(Item(title: "Do Laundry"))
         items.append(Item(title: "Finish App"))
         items.append(Item(title: "Walk the Dog"))
+    }
+    
+    fileprivate func setupIndicator() {
+        indicator.backgroundColor = .lightGray
+        indicator.layer.cornerRadius = 2
+        
+        searchBar.addSubview(indicator)
+        
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.centerXAnchor.constraint(equalTo: searchBar.centerXAnchor, constant: 0).isActive = true
+        indicator.topAnchor.constraint(equalTo: searchBar.topAnchor, constant: 6).isActive = true
+        indicator.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        indicator.heightAnchor.constraint(equalToConstant: 5).isActive = true
     }
 }
