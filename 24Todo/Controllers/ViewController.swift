@@ -10,7 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    var dayView: DayView!
     var listView: ListView!
+    var itemView: ItemView!
     var listViewOriginalCenter: CGPoint!
     var totalTransformation: CGFloat = 0
     
@@ -18,7 +20,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
+        setupDayView()
         setupListView()
+        setupItemView()
         setupGestureRecognizers()
     }
     
@@ -36,19 +40,48 @@ class ViewController: UIViewController {
     
     func createItemView(ofItem item: Item, withFrame frame: CGRect) {
         let itemFrame = CGRect(x: listView.frame.minX + frame.minX, y: listView.frame.minY + frame.maxY, width: frame.width, height: frame.height)
-        let itemView = ItemView(frame: itemFrame, item: item)
+        itemView.setupView(withFrame: itemFrame, andItem: item)
         view.addSubview(itemView)
+        itemView.isHidden = false
     }
 }
 
 // MARK: - HandleFunctions
 extension ViewController {
     
-    @objc fileprivate func handleDidLongPressOnCell(notification: Notification) {
-        guard let userInfo = notification.userInfo else {return}
-        let item = userInfo["item"] as! Item
-        let frame = userInfo["frame"] as! CGRect
-        createItemView(ofItem: item, withFrame: frame)
+    @objc fileprivate func handleLongPressGesture(gesture: UILongPressGestureRecognizer) {
+        switch gesture.state {
+        case .began:
+            handleLongPressGestureBegan(gesture)
+        case .changed:
+            handleLongPressGestureChanged(gesture)
+        case .ended:
+            handleLongPressGestureEnded(gesture)
+        default:
+            break
+        }
+    }
+    
+    fileprivate func handleLongPressGestureBegan(_ gesture: UILongPressGestureRecognizer) {
+        let location = gesture.location(in: listView.collectionView)
+        
+        
+        listView.getCellAt(location: location) { (item, frame) in
+            createItemView(ofItem: item, withFrame: frame)
+        }
+    }
+    
+    fileprivate func handleLongPressGestureChanged(_ gesture: UILongPressGestureRecognizer) {
+        let location = gesture.location(in: view)
+
+        itemView.center.y = location.y
+    }
+    
+    fileprivate func handleLongPressGestureEnded(_ gesture: UILongPressGestureRecognizer) {
+        let location = gesture.location(in: dayView.collectionView)
+        
+        dayView.dropItemAt(location: location, item: itemView.item)
+        itemView.isHidden = true
     }
     
     @objc fileprivate func handlePanGesture(gesture: UIPanGestureRecognizer) {
@@ -143,7 +176,7 @@ extension ViewController {
 // MARK:- Setup Functions
 extension ViewController {
     fileprivate func setupView() {
-        view.backgroundColor = .white
+        view.backgroundColor = .red
         
         setupNavBar()
     }
@@ -156,24 +189,36 @@ extension ViewController {
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor : UIColor.black]
     }
     
+    fileprivate func setupDayView() {
+        dayView = DayView(frame: view.frame)
+        view.addSubview(dayView)
+    }
+    
     fileprivate func setupListView() {
         listView = ListView(frame: CGRect(x: 0, y: view.frame.height*0.75, width: view.frame.width, height: view.frame.height))
         view.addSubview(listView)
     }
     
+    fileprivate func setupItemView() {
+        itemView = ItemView()
+        view.addSubview(itemView)
+        itemView.isHidden = true
+    }
+    
     fileprivate func setupGestureRecognizers() {
         listView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture)))
+        listView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture)))
     }
     
     fileprivate func setupNotificationObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleDidLongPressOnCell), name: Notification.Name.didLongPressOnCell, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(handleDidLongPressOnCell), name: Notification.Name.didLongPressOnCell, object: nil)
     }
     
     fileprivate func removeNotificationObservers() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.didLongPressOnCell, object: nil)
+        //NotificationCenter.default.removeObserver(self, name: Notification.Name.didLongPressOnCell, object: nil)
     }
 }

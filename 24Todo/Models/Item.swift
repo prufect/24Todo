@@ -9,7 +9,7 @@
 import Foundation
 
 struct Item {
-    let title: String
+    var title: String
     let startTime: Date?
     let length: Int?
     

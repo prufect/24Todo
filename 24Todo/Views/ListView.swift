@@ -4,17 +4,16 @@
 //
 //  Created by Prudhvi Gadiraju on 3/21/19.
 //  Copyright © 2019 Prudhvi Gadiraju. All rights reserved.
-//
 
 import UIKit
 
-class ListView: UIView, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class ListView: UIView, UISearchBarDelegate {
     var items = [Item]()
     var filteredItems = [Item]()
     
     let indicator = UIView()
     let searchBar = UISearchBar()
-    let tableView = UITableView()
+    var collectionView: UICollectionView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,8 +22,16 @@ class ListView: UIView, UITableViewDelegate, UITableViewDataSource, UISearchBarD
 
         setupView()
         setupSearchBar()
-        setupTableView(frame)
+        setupCollectionView(frame)
         setupIndicator()
+    }
+    
+    func getCellAt(location: CGPoint, foundCell: (Item, CGRect) -> ()) {
+        if let itemPath = collectionView.indexPathForItem(at: location) {
+            let item = items[itemPath.row]
+            let cell = collectionView.cellForItem(at: itemPath)
+            foundCell(item, cell!.frame)
+        }
     }
     
     func updateForConnect() {
@@ -57,16 +64,12 @@ extension ListView {
             filteredItems = items
         }
         
-        tableView.reloadData()
+        collectionView.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         // Remove Keyboard
         searchBar.endEditing(true)
-        
-        // Reload Table View with all Items
-        filteredItems = items
-        tableView.reloadData()
         
         // Create New Item
         let newItem = Item(title: searchBar.text!)
@@ -75,7 +78,11 @@ extension ListView {
         
         // Insert New Item for Animation
         let indexPath = IndexPath(row: 0, section: 0)
-        tableView.insertRows(at: [indexPath], with: .automatic)
+        collectionView.insertItems(at: [indexPath])
+        
+        // Reload Table View with all Items
+        filteredItems = items
+        collectionView.reloadData()
         
         // Reset SearchBar Text
         searchBar.text = ""
@@ -83,17 +90,13 @@ extension ListView {
 }
 
 //MARK:- Table View Functions
-extension ListView {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension ListView:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filteredItems.count
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ItemCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ItemCell
         
         let item = filteredItems[indexPath.row]
         cell.item = item
@@ -101,22 +104,12 @@ extension ListView {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let itemToRemove = filteredItems[indexPath.row]
-            items.removeAll { (item) -> Bool in
-                item.title == itemToRemove.title
-            }
-            filteredItems.remove(at: indexPath.row)
-            
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-        } else if editingStyle == .insert {
-            print("Insert")
-        }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: frame.width, height: 50)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
 }
 
@@ -153,21 +146,23 @@ extension ListView {
         searchBar.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
-    fileprivate func setupTableView(_ frame: CGRect) {
+    fileprivate func setupCollectionView(_ frame: CGRect) {
+        collectionView = UICollectionView(frame: frame, collectionViewLayout: UICollectionViewFlowLayout())
+        
         filteredItems = items
 
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(ItemCell.self, forCellReuseIdentifier: "cell")
-        tableView.tableFooterView = UIView()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.backgroundColor = .white
+        collectionView.register(ItemCell.self, forCellWithReuseIdentifier: "cell")
         
-        addSubview(tableView)
+        addSubview(collectionView)
         
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 0).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 0).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
     }
     
     fileprivate func setupDummyItems() {

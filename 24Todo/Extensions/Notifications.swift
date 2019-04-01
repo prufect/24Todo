@@ -9,5 +9,5 @@
 import Foundation
 
 extension Notification.Name {
-    static let didLongPressOnCell = Notification.Name("didLongPressOnCell")
+    //static let didLongPressOnCell = Notification.Name("didLongPressOnCell")
 }

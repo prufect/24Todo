@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ItemCell: UITableViewCell {
+class ItemCell: UICollectionViewCell {
 
     let titleLabel = UILabel()
     let dateLabel = UILabel()
@@ -16,12 +16,11 @@ class ItemCell: UITableViewCell {
     var item: Item! {
         didSet {
             setupView()
-            setupGestureRecognizers()
         }
     }
     
     fileprivate func setupView() {
-        
+                
         titleLabel.text = item.title
         titleLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         
@@ -47,23 +46,5 @@ class ItemCell: UITableViewCell {
             dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 8).isActive = true
         }
 
-    }
-    
-    fileprivate func setupGestureRecognizers() {
-        addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress)))
-    }
-    
-    fileprivate func handleLongPressBegan() {
-        NotificationCenter.default.post(name: NSNotification.Name.didLongPressOnCell, object: nil, userInfo: ["item": item!, "frame": frame])
-    }
-    
-    @objc fileprivate func handleLongPress(gesture: UILongPressGestureRecognizer) {
-        switch gesture.state {
-        case .began:
-            handleLongPressBegan()
-            break
-        default:
-            break
-        }
     }
 }

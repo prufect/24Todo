@@ -15,12 +15,9 @@ class ItemView: UIView {
     
     var item: Item!
     
-    init(frame: CGRect, item: Item) {
-        super.init(frame: frame)
-        
-        self.item = item
-        
-        setupView()
+    init() {
+        super.init(frame: CGRect(x: 250, y: 250, width: 50, height: 50))
+        backgroundColor = .lightGray
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -28,11 +25,12 @@ class ItemView: UIView {
     }
     
     
-    fileprivate func setupView() {
+    func setupView(withFrame frame: CGRect, andItem item: Item) {
+        self.item = item
+        self.frame = frame
         
         print("added \(item.title)", frame)
         
-        backgroundColor = .blue
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.5
         layer.shadowOffset = CGSize.zero
