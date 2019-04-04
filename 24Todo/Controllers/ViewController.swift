@@ -16,8 +16,6 @@ class ViewController: UIViewController {
     var listViewOriginalCenter: CGPoint!
     var totalTransformation: CGFloat = 0
     
-    var calendarWeekView = JZLongPressWeekView()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,10 +24,6 @@ class ViewController: UIViewController {
         setupListView()
         setupItemView()
         setupGestureRecognizers()
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        JZWeekViewHelper.viewTransitionHandler(to: size, weekView: calendarWeekView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
