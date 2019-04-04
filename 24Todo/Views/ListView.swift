@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ListView: UIView, UISearchBarDelegate {
+class ListView: UIView {
     var items = [Item]()
     var filteredItems = [Item]()
     
@@ -53,7 +53,7 @@ class ListView: UIView, UISearchBarDelegate {
 }
 
 //MARK:- Search Bar Functions {
-extension ListView {
+extension ListView: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // If SearchText is Empty show all Items, otherwise show filteredItems
         if !searchText.isEmpty {
