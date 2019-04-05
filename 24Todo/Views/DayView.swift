@@ -18,22 +18,15 @@ class DayView: UIView {
         super.init(frame: frame)
         
         setupView()
-        setupEmptyItems()
         setupCollectionView()
     }
     
     func dropItemAt(location: CGPoint, item: Item) {
         var item = item
-        if let index = collectionView.indexPathForItem(at: location) {
-            let oldItem = items[index.row]
-            let time = oldItem.title
-            let newTitle = "\(time) \(item.title)"
-            item.title = newTitle
-            
-            items[index.row] = item
-            collectionView.reloadData()
-            print("Reloaded \(item.title)")
-        }
+        item.startHour = Int((location.y - 140)) / 60
+        item.length = Int.random(in: 20...90)
+        items.append(item)
+        collectionView.reloadData()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -48,32 +41,25 @@ extension DayView: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ItemCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DayCell
         cell.item = items[indexPath.row]
-        cell.backgroundColor = .white
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: frame.width, height: 50)
+        let item = items[indexPath.row]
+        let length = item.length!
+        return CGSize(width: frame.width, height: CGFloat(length))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 1
     }
-    
-    
-    
 }
 
 extension DayView {
     func setupView() {
-    }
-    
-    func setupEmptyItems() {
-        (0..<12).forEach { (i) in
-            items.append(Item(title: "\(i):00"))
-        }
+        backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     }
     
     func setupCollectionView() {
@@ -81,8 +67,10 @@ extension DayView {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = .black
-        collectionView.register(ItemCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.backgroundColor = .clear
+        collectionView.register(DayCell.self, forCellWithReuseIdentifier: "cell")
+        
+        //collectionView.scrollToItem(at: IndexPath(row: 8, section: 0), at: .init(), animated: false)
 
         addSubview(collectionView)
      

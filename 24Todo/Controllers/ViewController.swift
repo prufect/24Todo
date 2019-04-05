@@ -12,7 +12,8 @@ class ViewController: UIViewController {
     
     var dayView: DayView!
     var listView: ListView!
-    var itemView: ItemView!
+    var dragView: ItemView!
+    
     var listViewOriginalCenter: CGPoint!
     var totalTransformation: CGFloat = 0
     
@@ -22,7 +23,7 @@ class ViewController: UIViewController {
         setupView()
         setupDayView()
         setupListView()
-        setupItemView()
+        setupDragView()
         setupGestureRecognizers()
     }
     
@@ -40,9 +41,10 @@ class ViewController: UIViewController {
     
     func createItemView(ofItem item: Item, withFrame frame: CGRect) {
         let itemFrame = CGRect(x: listView.frame.minX + frame.minX, y: listView.frame.minY + frame.maxY, width: frame.width, height: frame.height)
-        itemView.setupView(withFrame: itemFrame, andItem: item)
-        view.addSubview(itemView)
-        itemView.isHidden = false
+        dragView.frame = itemFrame
+        dragView.item = item
+        view.addSubview(dragView)
+        dragView.isHidden = false
     }
 }
 
@@ -65,7 +67,6 @@ extension ViewController {
     fileprivate func handleLongPressGestureBegan(_ gesture: UILongPressGestureRecognizer) {
         let location = gesture.location(in: listView.collectionView)
         
-        
         listView.getCellAt(location: location) { (item, frame) in
             createItemView(ofItem: item, withFrame: frame)
         }
@@ -74,14 +75,14 @@ extension ViewController {
     fileprivate func handleLongPressGestureChanged(_ gesture: UILongPressGestureRecognizer) {
         let location = gesture.location(in: view)
 
-        itemView.center.y = location.y
+        dragView.center.y = location.y
     }
     
     fileprivate func handleLongPressGestureEnded(_ gesture: UILongPressGestureRecognizer) {
-        let location = gesture.location(in: dayView.collectionView)
+        let location = gesture.location(in: view)
         
-        dayView.dropItemAt(location: location, item: itemView.item)
-        itemView.isHidden = true
+        dayView.dropItemAt(location: location, item: dragView.item)
+        dragView.isHidden = true
     }
     
     @objc fileprivate func handlePanGesture(gesture: UIPanGestureRecognizer) {
@@ -199,10 +200,10 @@ extension ViewController {
         view.addSubview(listView)
     }
     
-    fileprivate func setupItemView() {
-        itemView = ItemView()
-        view.addSubview(itemView)
-        itemView.isHidden = true
+    fileprivate func setupDragView() {
+        dragView = ItemView()
+        view.addSubview(dragView)
+        dragView.isHidden = true
     }
     
     fileprivate func setupGestureRecognizers() {

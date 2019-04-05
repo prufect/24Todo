@@ -23,6 +23,10 @@
 		A471E01E224F146D00AA30B0 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = A471E01D224F146D00AA30B0 /* Notifications.swift */; };
 		A471E020224F186300AA30B0 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A471E01F224F186300AA30B0 /* ItemView.swift */; };
 		A471E0222251ADC500AA30B0 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A471E0212251ADC500AA30B0 /* DayView.swift */; };
+		A4FC5DDE2256CEBE007E6542 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FC5DDD2256CEBE007E6542 /* DayCell.swift */; };
+		A4FC5DE22256CFDA007E6542 /* UIimageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FC5DDF2256CFDA007E6542 /* UIimageView.swift */; };
+		A4FC5DE32256CFDA007E6542 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FC5DE02256CFDA007E6542 /* UIView.swift */; };
+		A4FC5DE42256CFDA007E6542 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FC5DE12256CFDA007E6542 /* UIColor.swift */; };
 		E707F5E6D53332C5F7B71C6D /* Pods_24Todo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2655C496F77CD4D0C78D10E8 /* Pods_24Todo.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +74,10 @@
 		A471E01D224F146D00AA30B0 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		A471E01F224F186300AA30B0 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		A471E0212251ADC500AA30B0 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
+		A4FC5DDD2256CEBE007E6542 /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
+		A4FC5DDF2256CFDA007E6542 /* UIimageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIimageView.swift; sourceTree = "<group>"; };
+		A4FC5DE02256CFDA007E6542 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		A4FC5DE12256CFDA007E6542 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		CE97EF3750DA7EE15013107B /* Pods-24Todo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-24Todo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-24Todo/Pods-24Todo.debug.xcconfig"; sourceTree = "<group>"; };
 		EDEEF0FA2EABA2465675D0D3 /* Pods-24TodoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-24TodoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-24TodoTests/Pods-24TodoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F1CBDD0F4A9D3E6632A6E187 /* Pods-24TodoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-24TodoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-24TodoTests/Pods-24TodoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -183,6 +191,7 @@
 			children = (
 				A44F7F0E22446A0B00E48FE9 /* ListView.swift */,
 				A471E0212251ADC500AA30B0 /* DayView.swift */,
+				A4FC5DDD2256CEBE007E6542 /* DayCell.swift */,
 				A471E01A224F055A00AA30B0 /* ItemCell.swift */,
 				A471E01F224F186300AA30B0 /* ItemView.swift */,
 			);
@@ -200,6 +209,9 @@
 		A471E01C224F145200AA30B0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				A4FC5DE02256CFDA007E6542 /* UIView.swift */,
+				A4FC5DE12256CFDA007E6542 /* UIColor.swift */,
+				A4FC5DDF2256CFDA007E6542 /* UIimageView.swift */,
 				A471E01D224F146D00AA30B0 /* Notifications.swift */,
 			);
 			path = Extensions;
@@ -426,13 +438,17 @@
 			files = (
 				A471E016224ECC0700AA30B0 /* Item.swift in Sources */,
 				A471E01E224F146D00AA30B0 /* Notifications.swift in Sources */,
+				A4FC5DDE2256CEBE007E6542 /* DayCell.swift in Sources */,
 				A44F7F0F22446A0B00E48FE9 /* ListView.swift in Sources */,
+				A4FC5DE32256CFDA007E6542 /* UIView.swift in Sources */,
 				A471E020224F186300AA30B0 /* ItemView.swift in Sources */,
 				A471E0222251ADC500AA30B0 /* DayView.swift in Sources */,
 				A471E01B224F055A00AA30B0 /* ItemCell.swift in Sources */,
 				A44F7EE6224468D800E48FE9 /* _4Todo.xcdatamodeld in Sources */,
+				A4FC5DE42256CFDA007E6542 /* UIColor.swift in Sources */,
 				A44F7EE0224468D800E48FE9 /* ViewController.swift in Sources */,
 				A44F7EDE224468D800E48FE9 /* AppDelegate.swift in Sources */,
+				A4FC5DE22256CFDA007E6542 /* UIimageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
