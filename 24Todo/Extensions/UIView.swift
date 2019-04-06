@@ -88,4 +88,13 @@ extension UIView {
         }
     }
     
+    func addGradientBottomToTop(bottomColor color1: UIColor, topColor color2: UIColor) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = frame
+        gradientLayer.colors = [color1.cgColor, color2.cgColor]
+        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
+        layer.insertSublayer(gradientLayer, at: 0)
+    }
 }

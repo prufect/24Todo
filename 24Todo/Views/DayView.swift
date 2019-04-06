@@ -13,6 +13,7 @@ class DayView: UIView {
     // MARK :- Properties
     
     var collectionView: UICollectionView!
+    var shadowView: UIView!
     
     let eventStore = EKEventStore.init()
     var calendars = [EKCalendar]()
@@ -25,6 +26,7 @@ class DayView: UIView {
         
         setupView()
         setupCollectionView()
+        setupShadowView()
         checkCalendarAuthorizationStatus()
     }
     
@@ -92,6 +94,18 @@ extension DayView {
         }
         
         addSubview(collectionView)
+    }
+    
+    fileprivate func setupShadowView() {
+        shadowView = UIView(frame: CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: 1))
+        shadowView.backgroundColor = .white
+
+        shadowView.layer.shadowColor = UIColor.black.cgColor
+        shadowView.layer.shadowOpacity = 0.5
+        shadowView.layer.shadowOffset = CGSize.zero
+        shadowView.layer.shadowRadius = 3
+        
+        addSubview(shadowView)
     }
 }
 

@@ -116,6 +116,7 @@ extension MainViewController {
     fileprivate func handlePanBegan(gesture: UIPanGestureRecognizer) {
         listViewOriginalCenter = listView.center
         listView.updateForDisconnect()
+        navigationItem.title = "Today"
     }
     
     fileprivate func handlePanChanged(gesture: UIPanGestureRecognizer) {
@@ -147,6 +148,7 @@ extension MainViewController {
                 
                 // Remove Corner Radius
                 self.listView.updateForConnect()
+                self.navigationItem.title = "Todo"
                 
             }, completion: nil)
         }
