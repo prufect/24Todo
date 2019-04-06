@@ -23,4 +23,8 @@ class ItemCell: UICollectionViewCell {
         addSubview(itemView)
         itemView.fillSuperview()
     }
+    
+    func convertToView() {
+        itemView.convertView()
+    }
 }

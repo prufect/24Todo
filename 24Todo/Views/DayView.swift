@@ -81,8 +81,10 @@ extension DayView {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(DayCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(ItemCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(HourSupplementaryView.self, forSupplementaryViewOfKind: "hour", withReuseIdentifier: "hour")
         collectionView.backgroundColor = .white
+        //collectionView.backgroundView = HoursView(frame: collectionView.frame)
         
         if let layout = collectionView.collectionViewLayout as? CustomCalendarDayLayout {
             layout.delegate = self
@@ -169,9 +171,10 @@ extension DayView: UICollectionViewDelegate, UICollectionViewDataSource, CustomC
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DayCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ItemCell
         let item = items[indexPath.row]
         cell.item = item
+        cell.convertToView()
         return cell
     }
     

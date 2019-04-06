@@ -11,10 +11,6 @@ import UIKit
 class DayCell: UICollectionViewCell {
     
     var itemView = ItemView()
-    
-    var emptyView = UIView()
-    var hourTitleLabel = UILabel()
-    var separatorView = UIView()
         
     var item: Item? {
         didSet {
