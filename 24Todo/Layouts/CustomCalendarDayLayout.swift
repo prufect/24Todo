@@ -31,11 +31,10 @@ class CustomCalendarDayLayout: UICollectionViewLayout {
         
         for item in 0 ..< collectionView!.numberOfItems(inSection: 0) {
             let indexPath = IndexPath(item: item, section: 0)
-            print(item)
             let startingTime = delegate.collectionView(collectionView!, startTimeForItemAt: indexPath)
             let height = delegate.collectionView(collectionView!, heightForItemAt: indexPath)
-            let itemFrame = CGRect(x: 0, y: 1*startingTime - 30, width: Int(collectionView!.bounds.width), height: Int(height))
-            print(itemFrame)
+            let itemFrame = CGRect(x: 0, y: 1*startingTime, width: Int(collectionView!.bounds.width), height: Int(height))
+            
             // Create the layout attributes and set the frame
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
             attributes.frame = itemFrame
@@ -44,7 +43,7 @@ class CustomCalendarDayLayout: UICollectionViewLayout {
             cellAttributes[indexPath] = attributes
         }
         
-        computedContentSize = CGSize(width: collectionView!.frame.width, height: 60*24)
+        computedContentSize = CGSize(width: collectionView!.frame.width, height: 60*25)
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {

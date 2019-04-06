@@ -12,12 +12,16 @@ class DayCell: UICollectionViewCell {
     
     var itemView = ItemView()
     
+    var emptyView = UIView()
+    var hourTitleLabel = UILabel()
+    var separatorView = UIView()
+        
     var item: Item? {
         didSet {
             setupItemView()
         }
     }
-    
+
     fileprivate func setupItemView() {
         itemView.item = item!
         itemView.convertView()

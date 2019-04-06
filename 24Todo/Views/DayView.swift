@@ -24,7 +24,6 @@ class DayView: UIView {
         
         setupView()
         setupCollectionView()
-        
         checkCalendarAuthorizationStatus()
     }
     
@@ -32,7 +31,7 @@ class DayView: UIView {
         let item = item
         
         // Create Times for Event Based on Drag Location
-        var dropTime = Int(location.y)
+        var dropTime = Int(location.y) - 30
         print("DropTime", dropTime)
 
         if dropTime < 0 { dropTime = 0 }
@@ -192,7 +191,6 @@ extension DayView: UICollectionViewDelegate, UICollectionViewDataSource, CustomC
         let startMinutes = Calendar.current.component(.minute, from: startDate!)
         
         let totalMinutes = (startHour * 60) + startMinutes
-        print(totalMinutes)
         return totalMinutes
     }
 }
