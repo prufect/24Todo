@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HourSupplementaryView: UICollectionReusableView {
+class HourDecorationView: UICollectionReusableView {
     
     var separator = UIView()
     var label = UILabel()
@@ -22,7 +22,7 @@ class HourSupplementaryView: UICollectionReusableView {
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
-        if let atts = layoutAttributes as? HourSupplementaryViewAttributes {
+        if let atts = layoutAttributes as? HourDecorationViewAttributes {
             label.text = atts.title
         }
     }

@@ -34,7 +34,7 @@ class ItemView: UIView {
         titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0).isActive = true
     }
     
-//    fileprivate func setDateLabel() {
+    fileprivate func setDateLabel() {
 //        if let startTime = item.startTime, let length = item.length {
 //            dateLabel.text = "\(startTime) - \(length)"
 //            dateLabel.font = UIFont.systemFont(ofSize: 8, weight: .light)
@@ -47,7 +47,7 @@ class ItemView: UIView {
 //            dateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 16).isActive = true
 //            dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 8).isActive = true
 //        }
-//    }
+    }
     
     fileprivate func setDotView() {
         dotView.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)

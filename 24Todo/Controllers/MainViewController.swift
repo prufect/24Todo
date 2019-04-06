@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     
     var dayView: DayView!
     var listView: ListView!
@@ -51,7 +51,7 @@ class ViewController: UIViewController {
 }
 
 // MARK: - HandleFunctions
-extension ViewController {
+extension MainViewController {
     
     @objc fileprivate func handleLongPressGesture(gesture: UILongPressGestureRecognizer) {
         switch gesture.state {
@@ -184,7 +184,7 @@ extension ViewController {
 }
 
 // MARK:- Setup Functions
-extension ViewController {
+extension MainViewController {
     fileprivate func setupView() {
         view.backgroundColor = .red
         

@@ -18,7 +18,8 @@ class DayView: UIView {
     var calendars = [EKCalendar]()
     var items = [Item]()
     
-    
+    // MARK :- Init
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -82,7 +83,7 @@ extension DayView {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(ItemCell.self, forCellWithReuseIdentifier: "cell")
-        collectionView.register(HourSupplementaryView.self, forSupplementaryViewOfKind: "hour", withReuseIdentifier: "hour")
+        collectionView.register(HourDecorationView.self, forSupplementaryViewOfKind: "hour", withReuseIdentifier: "hour")
         collectionView.backgroundColor = .white
         //collectionView.backgroundView = HoursView(frame: collectionView.frame)
         

@@ -8,6 +8,9 @@
 import UIKit
 
 class ListView: UIView {
+    
+    // MARK :- Properties
+    
     var items = [Item]()
     var filteredItems = [Item]()
     
@@ -15,6 +18,8 @@ class ListView: UIView {
     let searchBar = UISearchBar()
     var collectionView: UICollectionView!
     
+    // MARK :- Init
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -89,7 +94,7 @@ extension ListView: UISearchBarDelegate {
     }
 }
 
-//MARK:- Table View Functions
+//MARK:- Collection View Functions
 extension ListView:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filteredItems.count

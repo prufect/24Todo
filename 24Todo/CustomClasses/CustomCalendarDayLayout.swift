@@ -8,15 +8,6 @@
 
 import UIKit
 
-protocol CustomCalendarDayLayoutDelegate {
-    func collectionView(_ collectionView: UICollectionView, heightForItemAt indexPath: IndexPath) -> Int
-    func collectionView(_ collectionView: UICollectionView, startTimeForItemAt indexPath: IndexPath) -> Int
-}
-
-class HourSupplementaryViewAttributes : UICollectionViewLayoutAttributes {
-    var title = ""
-}
-
 class CustomCalendarDayLayout: UICollectionViewLayout {
     
     private var computedContentSize: CGSize = .zero
@@ -26,7 +17,7 @@ class CustomCalendarDayLayout: UICollectionViewLayout {
     override init() {
         super.init()
         
-        register(HourSupplementaryView.self, forDecorationViewOfKind: "Hour")
+        register(HourDecorationView.self, forDecorationViewOfKind: "Hour")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -110,7 +101,7 @@ class CustomCalendarDayLayout: UICollectionViewLayout {
     
     override func layoutAttributesForDecorationView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         if elementKind == "Hour" {
-            let atts = HourSupplementaryViewAttributes(forDecorationViewOfKind: "Hour", with: indexPath)
+            let atts = HourDecorationViewAttributes(forDecorationViewOfKind: "Hour", with: indexPath)
             
             var index = indexPath.row
             var amOrPm = ""
