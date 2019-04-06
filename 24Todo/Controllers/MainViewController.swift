@@ -186,16 +186,17 @@ extension MainViewController {
 // MARK:- Setup Functions
 extension MainViewController {
     fileprivate func setupView() {
-        view.backgroundColor = .red
+        view.backgroundColor = .white
         
         setupNavBar()
     }
     
     fileprivate func setupNavBar() {
-        navigationItem.title = "Today"
+        navigationItem.title = "Todo"
         
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor : UIColor.black]
     }
     
@@ -212,7 +213,8 @@ extension MainViewController {
     }
     
     fileprivate func setupListView() {
-        listView = ListView(frame: CGRect(x: 0, y: view.frame.height-140, width: view.frame.width, height: view.frame.height))
+        listView = ListView(frame: CGRect(x: 0, y: 140, width: view.frame.width, height: view.frame.height))
+        listView.updateForConnect()
         view.addSubview(listView)
     }
     

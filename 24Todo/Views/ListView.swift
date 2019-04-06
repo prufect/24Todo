@@ -48,6 +48,7 @@ class ListView: UIView {
         if indicator.alpha != 1 {
             UIView.animate(withDuration: 0.2) {
                 self.indicator.alpha = 1
+                self.searchBar.clipsToBounds = true
             }
         }
     }
