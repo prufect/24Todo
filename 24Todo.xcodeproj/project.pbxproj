@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4FDCFD770271B8ADF6554C7F /* Pods_24TodoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBA7F6341D789AC9F873FB8 /* Pods_24TodoTests.framework */; };
 		5C75C57879BFAB2D21F9ADEB /* Pods_24TodoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B76C01B9F8443C71864F055 /* Pods_24TodoUITests.framework */; };
+		A429A5E42259046B00C4AB81 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = A429A5E32259046B00C4AB81 /* Date.swift */; };
+		A429A5E82259056A00C4AB81 /* CustomCalendarDayLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A429A5E72259056A00C4AB81 /* CustomCalendarDayLayout.swift */; };
 		A44F7EDE224468D800E48FE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44F7EDD224468D800E48FE9 /* AppDelegate.swift */; };
 		A44F7EE0224468D800E48FE9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44F7EDF224468D800E48FE9 /* ViewController.swift */; };
 		A44F7EE3224468D800E48FE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44F7EE1224468D800E48FE9 /* Main.storyboard */; };
@@ -54,6 +56,8 @@
 		3C3F1B21C11B2B19A72A06DC /* Pods-24Todo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-24Todo.release.xcconfig"; path = "Pods/Target Support Files/Pods-24Todo/Pods-24Todo.release.xcconfig"; sourceTree = "<group>"; };
 		6B76C01B9F8443C71864F055 /* Pods_24TodoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_24TodoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBA7F6341D789AC9F873FB8 /* Pods_24TodoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_24TodoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A429A5E32259046B00C4AB81 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		A429A5E72259056A00C4AB81 /* CustomCalendarDayLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalendarDayLayout.swift; sourceTree = "<group>"; };
 		A44F7EDA224468D800E48FE9 /* 24Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 24Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44F7EDD224468D800E48FE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A44F7EDF224468D800E48FE9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +125,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A429A5E52259053900C4AB81 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				A4FC5DDD2256CEBE007E6542 /* DayCell.swift */,
+				A471E01A224F055A00AA30B0 /* ItemCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		A429A5E62259055300C4AB81 /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				A429A5E72259056A00C4AB81 /* CustomCalendarDayLayout.swift */,
+			);
+			path = Layouts;
+			sourceTree = "<group>";
+		};
 		A44F7ED1224468D800E48FE9 = {
 			isa = PBXGroup;
 			children = (
@@ -146,10 +167,12 @@
 		A44F7EDC224468D800E48FE9 /* 24Todo */ = {
 			isa = PBXGroup;
 			children = (
+				A429A5E62259055300C4AB81 /* Layouts */,
 				A471E019224EE10400AA30B0 /* Models */,
 				A471E018224EE10100AA30B0 /* Views */,
+				A429A5E52259053900C4AB81 /* Cells */,
 				A471E017224EE0FC00AA30B0 /* Controllers */,
-				A471E01C224F145200AA30B0 /* Extensions */,
+				A4FC5E0922571686007E6542 /* Resources */,
 				A44F7EDD224468D800E48FE9 /* AppDelegate.swift */,
 				A44F7EE1224468D800E48FE9 /* Main.storyboard */,
 				A44F7EE7224468D800E48FE9 /* Assets.xcassets */,
@@ -191,8 +214,6 @@
 			children = (
 				A44F7F0E22446A0B00E48FE9 /* ListView.swift */,
 				A471E0212251ADC500AA30B0 /* DayView.swift */,
-				A4FC5DDD2256CEBE007E6542 /* DayCell.swift */,
-				A471E01A224F055A00AA30B0 /* ItemCell.swift */,
 				A471E01F224F186300AA30B0 /* ItemView.swift */,
 			);
 			path = Views;
@@ -213,8 +234,25 @@
 				A4FC5DE12256CFDA007E6542 /* UIColor.swift */,
 				A4FC5DDF2256CFDA007E6542 /* UIimageView.swift */,
 				A471E01D224F146D00AA30B0 /* Notifications.swift */,
+				A429A5E32259046B00C4AB81 /* Date.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A4FC5E0922571686007E6542 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A4FC5E0A22571697007E6542 /* CustomClasses */,
+				A471E01C224F145200AA30B0 /* Extensions */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A4FC5E0A22571697007E6542 /* CustomClasses */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomClasses;
 			sourceTree = "<group>";
 		};
 		DF2B8614C50CED0DEFC2F65F /* Pods */ = {
@@ -441,10 +479,12 @@
 				A4FC5DDE2256CEBE007E6542 /* DayCell.swift in Sources */,
 				A44F7F0F22446A0B00E48FE9 /* ListView.swift in Sources */,
 				A4FC5DE32256CFDA007E6542 /* UIView.swift in Sources */,
+				A429A5E82259056A00C4AB81 /* CustomCalendarDayLayout.swift in Sources */,
 				A471E020224F186300AA30B0 /* ItemView.swift in Sources */,
 				A471E0222251ADC500AA30B0 /* DayView.swift in Sources */,
 				A471E01B224F055A00AA30B0 /* ItemCell.swift in Sources */,
 				A44F7EE6224468D800E48FE9 /* _4Todo.xcdatamodeld in Sources */,
+				A429A5E42259046B00C4AB81 /* Date.swift in Sources */,
 				A4FC5DE42256CFDA007E6542 /* UIColor.swift in Sources */,
 				A44F7EE0224468D800E48FE9 /* ViewController.swift in Sources */,
 				A44F7EDE224468D800E48FE9 /* AppDelegate.swift in Sources */,

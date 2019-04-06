@@ -8,16 +8,24 @@
 
 import Foundation
 
-struct Item {
+class Item {
     var title: String
-    var startTime: Date?
-    var startHour: Int?
-    var length: Int?
+    var startDate: Date?
+    var endDate: Date?
+    var length: Int {
+        get {
+            if let startDate = startDate, let endDate = endDate {
+                return endDate.subtract(startDate: startDate)
+            } else {
+                print("Error: Must Init startDate and endDate to use this property!")
+                return -1
+            }
+        }
+    }
     
-    init(title: String, startTime: Date? = nil, length: Int? = nil) {
+    init(title: String, startDate: Date? = nil, endDate: Date? = nil) {
         self.title = title
-        self.startTime = startTime
-        self.length = length
-        self.startHour = nil
+        self.startDate = startDate
+        self.endDate = endDate
     }
 }

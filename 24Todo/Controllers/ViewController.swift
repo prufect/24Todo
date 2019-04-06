@@ -43,7 +43,9 @@ class ViewController: UIViewController {
         let itemFrame = CGRect(x: listView.frame.minX + frame.minX, y: listView.frame.minY + frame.maxY, width: frame.width, height: frame.height)
         dragView.frame = itemFrame
         dragView.item = item
+        dragView.convertView()
         view.addSubview(dragView)
+        dragView.alpha = 1
         dragView.isHidden = false
     }
 }
@@ -79,10 +81,19 @@ extension ViewController {
     }
     
     fileprivate func handleLongPressGestureEnded(_ gesture: UILongPressGestureRecognizer) {
-        let location = gesture.location(in: view)
-        
-        dayView.dropItemAt(location: location, item: dragView.item)
-        dragView.isHidden = true
+        if dragView.center.y > listView.frame.minY{
+            dragView.isHidden = true
+        } else {
+            let location = gesture.location(in: dayView.collectionView)
+            
+            dayView.dropItemAt(location: location, item: dragView.item)
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                self.dragView.alpha = 0
+            }) { (true) in
+                self.dragView.isHidden = true
+            }
+        }
     }
     
     @objc fileprivate func handlePanGesture(gesture: UIPanGestureRecognizer) {
@@ -152,8 +163,6 @@ extension ViewController {
                 
             }, completion: nil)
         }
-        
-        // If close to bottom then
     }
     
     @objc fileprivate func handleKeyboardShow(notification: Notification) {
@@ -193,6 +202,8 @@ extension ViewController {
     fileprivate func setupDayView() {
         dayView = DayView(frame: view.frame)
         view.addSubview(dayView)
+        
+        dayView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
     }
     
     fileprivate func setupListView() {

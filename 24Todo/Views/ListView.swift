@@ -169,7 +169,7 @@ extension ListView {
         items.append(Item(title: "Do Laundry"))
         items.append(Item(title: "Finish App"))
         items.append(Item(title: "Walk the Dog"))
-        items.append(Item(title: "Take notes at Meeting", startTime: Date(), length: 60))
+        items.append(Item(title: "Take notes at Meeting"))
     }
     
     fileprivate func setupIndicator() {
