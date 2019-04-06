@@ -24,6 +24,8 @@ class DayView: UIView {
         
         setupView()
         setupCollectionView()
+        
+        checkCalendarAuthorizationStatus()
     }
     
     func dropItemAt(location: CGPoint, item: Item) {
@@ -119,7 +121,7 @@ extension DayView {
                 })
             } else {
                 DispatchQueue.main.async(execute: {
-                    //
+                    // handle request rejected
                 })
             }
         })
@@ -133,19 +135,12 @@ extension DayView {
         let thursday = dateFormatter.date(from: "Apr 04, 2019")!
         let friday = dateFormatter.date(from: "Apr 05, 2019")!
         
-        //print(thursday)
-        //let yesterday = Calendar.current.date(byAdding: .day, value: -3, to: Date())!
-        
         let predicate = eventStore.predicateForEvents(withStart: thursday, end: friday, calendars: calendars)
         let events = eventStore.events(matching: predicate)
         
         for event in events{
-            
-            //let calendar = Calendar.current
             let startDate = event.startDate!
             let endDate = event.endDate!
-            //let startTime = calendar.component(.hour, from: startDate)
-            //let length = event.startDate.subtract(startDate: event.endDate)
             
             // Create Actual Event Item
             let item = Item(title: event.title, startDate: startDate, endDate: endDate)
@@ -155,6 +150,8 @@ extension DayView {
     
     func loadCalendars() {
         self.calendars = eventStore.calendars(for: EKEntityType.event)
+        loadEventsForDay()
+        collectionView.reloadData()
     }
 }
 
