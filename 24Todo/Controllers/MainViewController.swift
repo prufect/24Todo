@@ -151,7 +151,7 @@ extension MainViewController {
             }, completion: nil)
         }
         
-        let bottomBarrier: CGFloat = 60
+        let bottomBarrier: CGFloat = 140
         let bottomLeeway: CGFloat = 50
         
         if listViewHeight > (view.frame.height - bottomBarrier) - bottomLeeway  || velocity > 1500{
@@ -200,14 +200,19 @@ extension MainViewController {
     }
     
     fileprivate func setupDayView() {
-        dayView = DayView(frame: view.frame)
+        dayView = DayView(frame: CGRect(x: view.frame.minX, y: view.frame.minY, width: view.frame.width, height: view.frame.height - 160))
         view.addSubview(dayView)
         
-        dayView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
+        //dayView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
+        dayView.translatesAutoresizingMaskIntoConstraints = false
+        dayView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+        dayView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        dayView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        dayView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -140).isActive = true
     }
     
     fileprivate func setupListView() {
-        listView = ListView(frame: CGRect(x: 0, y: view.frame.height*0.75, width: view.frame.width, height: view.frame.height))
+        listView = ListView(frame: CGRect(x: 0, y: view.frame.height-140, width: view.frame.width, height: view.frame.height))
         view.addSubview(listView)
     }
     
