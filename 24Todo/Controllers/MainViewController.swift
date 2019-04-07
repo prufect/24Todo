@@ -85,6 +85,7 @@ extension MainViewController {
         
         listView.getCellAt(location: location) { (item, frame) in
             createItemView(ofItem: item, withFrame: frame)
+            print(item.title)
         }
     }
     
@@ -220,8 +221,8 @@ extension MainViewController {
 // MARK:- Setup Functions
 extension MainViewController {
     fileprivate func setupView() {
+        //extendedLayoutIncludesOpaqueBars = true
         view.backgroundColor = .white
-
         setupNavBar()
     }
     
@@ -231,12 +232,14 @@ extension MainViewController {
         //navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         
         navigationController?.navigationBar.isTranslucent = false
-        //navigationController?.view.backgroundColor = .white
-        navigationController?.navigationBar.backgroundColor = .white
+        navigationController?.view.backgroundColor = .white
+        //navigationController?.navigationBar.backgroundColor = .white
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-        navigationController?.navigationBar.clipsToBounds = true
+        //navigationController?.navigationBar.barTintColor = .white
+        //navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+        
+        navigationController?.navigationBar.shadowImage = UIImage()
+        //navigationController?.navigationBar.clipsToBounds = true
         navigationController?.navigationBar.tintColor = Theme.theme.titleTextColor
         
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor : Theme.theme.titleTextColor,

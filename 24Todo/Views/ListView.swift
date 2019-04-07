@@ -39,7 +39,7 @@ class ListView: UIView {
     
     func getCellAt(location: CGPoint, foundCell: (Item, CGRect) -> ()) {
         if let itemPath = collectionView.indexPathForItem(at: location) {
-            let item = items[itemPath.row]
+            let item = filteredItems[itemPath.row]
             let cell = collectionView.cellForItem(at: itemPath)
             foundCell(item, cell!.frame)
         }
@@ -138,7 +138,7 @@ extension ListView:  UICollectionViewDelegate, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate!.pushItemViewController(withItem: items[indexPath.row])
+        //delegate!.pushItemViewController(withItem: items[indexPath.row])
     }
 }
 

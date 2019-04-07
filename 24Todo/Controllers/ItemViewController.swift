@@ -16,10 +16,27 @@ class ItemViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
+        setupNavBar()
     }
     
     fileprivate func setupView() {
-        view.backgroundColor = item.color
-        navigationController?.navigationBar.barTintColor = item.color
+        view.backgroundColor = .white
+        // This line killed 4 hours!
+        extendedLayoutIncludesOpaqueBars = true
+    }
+    
+    fileprivate func setupNavBar() {
+        navigationItem.title = item.title
+    }
+    
+    @objc fileprivate func handleSwipe() {
+        
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromLeft
+        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+        view.window!.layer.add(transition, forKey: kCATransition)
+        present(UINavigationController(rootViewController: MainViewController()), animated: true, completion: nil)
     }
 }
