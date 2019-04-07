@@ -15,34 +15,32 @@ class ItemViewController: UIViewController {
     
     var colorIcon: LOTAnimationView!
     var timeLabel: UILabel!
-    var titleTextView: UITextView!
-    var descriptionTextView: UITextView!
+    var titleTextView: NamedUITextView!
+    var descriptionTextView: NamedUITextView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
         setupNavBar()
-        
-        // Show Color icon
         setupColorIcon()
-        
-        // show start and end if there is
         setupStartTime()
-        
-        // Setup Title Label
         setupTitle()
-        
-        // Description Text
-        setupDescriptionTextView()
+        setupDescription()
         
         // Delete Option
         // Right Bar Button Item?
+        
+        // Add Top Gesture
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        view.addGestureRecognizer(tapGesture)
     }
     
-    fileprivate func setupDescriptionTextView() {
+    fileprivate func setupDescription() {
         
-        descriptionTextView = UITextView()
+        descriptionTextView = NamedUITextView()
+        descriptionTextView.name = TextViewName.description
         
         if let description = item.description {
             descriptionTextView.text = description
@@ -53,7 +51,8 @@ class ItemViewController: UIViewController {
         
         descriptionTextView.textColor = Theme.theme.descriptionTextColor
         descriptionTextView.font = Theme.theme.descriptionFont
-        descriptionTextView.isScrollEnabled = false
+        descriptionTextView.delegate = self
+        //descriptionTextView.inputAccessoryView = InputAccessoryView()
         
         view.addSubview(descriptionTextView)
         
@@ -61,17 +60,19 @@ class ItemViewController: UIViewController {
         descriptionTextView.topAnchor.constraint(equalTo: titleTextView.bottomAnchor, constant: 0).isActive = true
         descriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         descriptionTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        //titleTextView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        descriptionTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -32).isActive = true
     }
     
     fileprivate func setupTitle() {
         let title = item.title
         
-        titleTextView = UITextView()
+        titleTextView = NamedUITextView()
+        titleTextView.name = TextViewName.title
         titleTextView.text = title
         titleTextView.font = Theme.theme.titleFont
         titleTextView.textColor = Theme.theme.titleTextColor
         titleTextView.isScrollEnabled = false
+        titleTextView.delegate = self
         
         view.addSubview(titleTextView)
         
@@ -140,6 +141,10 @@ class ItemViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
     }
     
+    @objc fileprivate func handleTap() {
+        view.endEditing(true)
+    }
+    
     @objc fileprivate func handleDone() {
         item.isDone = !item.isDone
         
@@ -147,6 +152,33 @@ class ItemViewController: UIViewController {
             colorIcon.play()
         } else {
             colorIcon.animationProgress = 0
+        }
+    }
+}
+
+extension ItemViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        let textView = textView as! NamedUITextView
+        
+        switch textView.name! {
+        case .title:
+            print(textView.text!)
+        case .description:
+            print(textView.text!)
+        }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        let textView = textView as! NamedUITextView
+        
+        switch textView.name! {
+        case .title:
+            print(textView.text!)
+        case .description:
+            if textView.text == "Enter more details here ... " {
+                textView.text = ""
+                textView.alpha = 1
+            }
         }
     }
 }
