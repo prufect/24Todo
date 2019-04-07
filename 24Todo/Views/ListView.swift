@@ -35,6 +35,7 @@ class ListView: UIView {
         setupSearchBar()
         setupCollectionView(frame)
         setupIndicator()
+        
     }
     
     func getCellAt(location: CGPoint, foundCell: (Item, CGRect) -> ()) {

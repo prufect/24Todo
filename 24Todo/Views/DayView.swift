@@ -19,7 +19,7 @@ class DayView: UIView {
     let eventStore = EKEventStore.init()
     var calendars = [EKCalendar]()
     var items = [Item]()
-    
+        
     // MARK :- Init
 
     override init(frame: CGRect) {
@@ -150,7 +150,7 @@ extension DayView {
     }
     
     func scrollToTop() {
-        collectionView.setContentOffset(CGPoint(x: 0, y: -50), animated: true)
+        collectionView.setContentOffset(CGPoint(x: 0, y: -1), animated: true)
     }
 }
 

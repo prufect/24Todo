@@ -63,7 +63,9 @@ class MainViewController: UIViewController {
 // MARK: - HandleFunctions
 extension MainViewController {
     
+    
     @objc fileprivate func handleNavBarTapped() {
+        view.endEditing(true)
         dayView.scrollToTop()
     }
     
@@ -81,6 +83,7 @@ extension MainViewController {
     }
     
     fileprivate func handleLongPressGestureBegan(_ gesture: UILongPressGestureRecognizer) {
+        view.endEditing(true)
         let location = gesture.location(in: listView.collectionView)
         
         listView.getCellAt(location: location) { (item, frame) in
@@ -122,6 +125,8 @@ extension MainViewController {
     }
     
     @objc fileprivate func handlePanGesture(gesture: UIPanGestureRecognizer) {
+        view.endEditing(true)
+
         
         switch gesture.state {
         case .began:
@@ -201,7 +206,7 @@ extension MainViewController {
     }
     
     @objc fileprivate func handleKeyboardShow(notification: Notification) {
-        // Only Move View when its lower then half the screen
+        // Only Move View when its lower then half the screen        
         if listView.frame.minY > view.frame.height / 2 {
             guard let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
             let keyboardFrame = value.cgRectValue
