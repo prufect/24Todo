@@ -116,7 +116,8 @@ extension MainViewController {
     fileprivate func handlePanBegan(gesture: UIPanGestureRecognizer) {
         listViewOriginalCenter = listView.center
         listView.updateForDisconnect()
-        navigationItem.title = "Today"
+        animateTitle(newTitle: "Today")
+
     }
     
     fileprivate func handlePanChanged(gesture: UIPanGestureRecognizer) {
@@ -149,6 +150,7 @@ extension MainViewController {
                 // Remove Corner Radius
                 self.listView.updateForConnect()
                 self.navigationItem.title = "Todo"
+                self.animateTitle(newTitle: "Todo")
                 
             }, completion: nil)
         }
@@ -203,6 +205,15 @@ extension MainViewController {
                                                                         .font: Theme.theme.titleLargeFont]
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : Theme.theme.titleTextColor,
                                                                    .font: Theme.theme.titleFont]
+    }
+    
+    fileprivate func animateTitle(newTitle: String) {
+        let titleAnimation = CATransition()
+        titleAnimation.duration = 0.5
+        titleAnimation.type = CATransitionType.moveIn
+        navigationController?.navigationBar.layer.add(titleAnimation, forKey: "titleAnimation")
+        
+        self.navigationItem.title = newTitle;
     }
     
     fileprivate func setupDayView() {
