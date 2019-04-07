@@ -200,7 +200,9 @@ extension MainViewController {
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor : Theme.theme.titleTextColor,
-                                                                        .font: Theme.theme.titleFont]
+                                                                        .font: Theme.theme.titleLargeFont]
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : Theme.theme.titleTextColor,
+                                                                   .font: Theme.theme.titleFont]
     }
     
     fileprivate func setupDayView() {

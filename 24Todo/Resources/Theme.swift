@@ -17,10 +17,13 @@ class Theme {
     
     let itemColors = [#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.5972624421, green: 0.4536020756, blue: 0.9493510127, alpha: 1), #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1), #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1), #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1), #colorLiteral(red: 1, green: 0.2907092571, blue: 0.4144412279, alpha: 1)]
     
-    let titleFont = UIFont(name: "Montserrat-Bold", size: 42)!
-    let itemFont = UIFont(name: "Montserrat-Medium", size: 16)!
+    let titleLargeFont = UIFont(name: "Montserrat-Bold", size: 42)!
+    let titleFont = UIFont(name: "Montserrat-Bold", size: 24)!
+
+    let itemListFont = UIFont(name: "Montserrat-Medium", size: 16)!
+    //let itemCalendarFont = UIFont(name: "Montserrat-Medium", size: 14)!
     let searchFont = UIFont(name: "Montserrat-Regular", size: 16)!
     let calendarBackgroundFont = UIFont(name: "Montserrat-Light", size: 12)!
     
-    let itemDotSize = 16
+    let itemDotSize = 14.5
 }

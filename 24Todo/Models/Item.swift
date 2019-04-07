@@ -6,18 +6,23 @@
 //  Copyright © 2019 Prudhvi Gadiraju. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Item {
     var title: String
     var startDate: Date?
     var endDate: Date?
     var isEmpty: Bool = false
+    var color: UIColor
     
     var length: Int {
         get {
             if let startDate = startDate, let endDate = endDate {
-                return endDate.subtract(startDate: startDate)
+                var diff = endDate.subtract(startDate: startDate)
+                if diff < 30 {
+                    diff = 30
+                }
+                return diff
             } else {
                 print("Error: Must Init startDate and endDate to use this property!")
                 return -1
@@ -29,5 +34,6 @@ class Item {
         self.title = title
         self.startDate = startDate
         self.endDate = endDate
+        self.color = Theme.theme.itemColors.randomElement()!
     }
 }

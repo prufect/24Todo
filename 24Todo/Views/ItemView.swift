@@ -23,14 +23,13 @@ class ItemView: UIView {
     
     fileprivate func setTitleLabel() {
         titleLabel.text = item.title
-        titleLabel.font = Theme.theme.itemFont
+        titleLabel.font = Theme.theme.itemListFont
         titleLabel.textColor = Theme.theme.itemTextColor
         
         addSubview(titleLabel)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo: dotView.trailingAnchor, constant: 16).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: dotView.trailingAnchor, constant: 6).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 16).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0).isActive = true
     }
@@ -51,7 +50,7 @@ class ItemView: UIView {
     }
     
     fileprivate func setDotView() {
-        dotView.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+        dotView.backgroundColor = item.color
         dotView.frame = CGRect(x: 0, y: 0, width: Theme.theme.itemDotSize, height: Theme.theme.itemDotSize)
         dotView.layer.cornerRadius = CGFloat(Theme.theme.itemDotSize/2)
         
@@ -71,8 +70,8 @@ class ItemView: UIView {
     }
     
     func convertView() {
-        bgView.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
-        bgView.alpha = 0.4
+        bgView.backgroundColor = item.color
+        bgView.alpha = 0.6
         
         addSubview(bgView)
         sendSubviewToBack(bgView)

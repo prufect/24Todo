@@ -131,7 +131,7 @@ extension ListView {
     }
     
     fileprivate func setupSearchBar() {
-        searchBar.placeholder = "Search for or Create an Item"
+        searchBar.placeholder = "Start typing"
         searchBar.searchBarStyle = .default
         searchBar.sizeToFit()
         searchBar.isTranslucent = false
@@ -141,9 +141,11 @@ extension ListView {
         searchBar.layer.cornerRadius = 8
         searchBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         searchBar.clipsToBounds = true
+        searchBar.setImage(#imageLiteral(resourceName: "searchBarIcon").withRenderingMode(.alwaysTemplate), for: .search, state: .normal)
+        searchBar.tintColor = .lightGray
         
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as! UITextField
-        textFieldInsideSearchBar.font = Theme.theme.itemFont
+        textFieldInsideSearchBar.font = Theme.theme.itemListFont
         
         addSubview(searchBar)
         
