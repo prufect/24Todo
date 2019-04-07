@@ -140,9 +140,10 @@ extension DayView {
             scrollOffset = 100
         }
         
-        currentTimeView = UIView(frame: CGRect(x: frame.minX, y: CGFloat(currentTime), width: frame.width, height: CGFloat(3)))
+        currentTimeView = UIView(frame: CGRect(x: -10, y: CGFloat(currentTime), width: 58, height: CGFloat(10)))
         currentTimeView.backgroundColor = Theme.theme.titleTextColor
-        currentTimeView.layer.cornerRadius = 5
+        currentTimeView.alpha = 0.3
+        currentTimeView.layer.cornerRadius = 10
         
         collectionView.addSubview(currentTimeView)
         collectionView.setContentOffset(CGPoint(x: 0, y: scrollOffset - 100), animated: true)
