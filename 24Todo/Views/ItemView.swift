@@ -52,11 +52,21 @@ class ItemView: UIView {
     }
     
     fileprivate func setDotAnimationView() {
+        
+
+        
         dotAnimationView.frame = CGRect(x: 0, y: 0, width: 52, height: 52)
         dotAnimationView.contentMode = .scaleAspectFill
         //dotAnimationView.transform = CGAffineTransform.init(scaleX: 1.25, y: 1.25)
 
         dotAnimationView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleItemCompletionTapped)))
+        
+        if item.isDone {
+            dotAnimationView.animationProgress = 1
+            print(item.isDone)
+        } else {
+            dotAnimationView.animationProgress = 0
+        }
         
         addSubview(dotAnimationView)
         
@@ -102,7 +112,7 @@ class ItemView: UIView {
     }
     
     @objc fileprivate func handleItemCompletionTapped() {
-        print("Animate")
+        item.isDone = true
         dotAnimationView.play()
     }
 }
