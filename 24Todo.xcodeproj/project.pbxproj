@@ -27,6 +27,7 @@
 		A429A61A225985D700C4AB81 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A429A619225985D700C4AB81 /* UITextField.swift */; };
 		A429A6472259B1E000C4AB81 /* ItemCompletionAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = A429A6462259B1E000C4AB81 /* ItemCompletionAnimation.json */; };
 		A429A6492259CD8300C4AB81 /* AlwaysLargeNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A429A6482259CD8300C4AB81 /* AlwaysLargeNavController.swift */; };
+		A429A64B225A76F800C4AB81 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A429A64A225A76F800C4AB81 /* ItemViewController.swift */; };
 		A44F7EDE224468D800E48FE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44F7EDD224468D800E48FE9 /* AppDelegate.swift */; };
 		A44F7EE0224468D800E48FE9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44F7EDF224468D800E48FE9 /* MainViewController.swift */; };
 		A44F7EE6224468D800E48FE9 /* _4Todo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A44F7EE4224468D800E48FE9 /* _4Todo.xcdatamodeld */; };
@@ -87,6 +88,7 @@
 		A429A619225985D700C4AB81 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		A429A6462259B1E000C4AB81 /* ItemCompletionAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ItemCompletionAnimation.json; sourceTree = "<group>"; };
 		A429A6482259CD8300C4AB81 /* AlwaysLargeNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysLargeNavController.swift; sourceTree = "<group>"; };
+		A429A64A225A76F800C4AB81 /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		A44F7EDA224468D800E48FE9 /* 24Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 24Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44F7EDD224468D800E48FE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A44F7EDF224468D800E48FE9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				A44F7EDF224468D800E48FE9 /* MainViewController.swift */,
+				A429A64A225A76F800C4AB81 /* ItemViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -574,6 +577,7 @@
 				A429A61A225985D700C4AB81 /* UITextField.swift in Sources */,
 				A44F7EE6224468D800E48FE9 /* _4Todo.xcdatamodeld in Sources */,
 				A429A5F122594FBC00C4AB81 /* HourDecorationViewAttributes.swift in Sources */,
+				A429A64B225A76F800C4AB81 /* ItemViewController.swift in Sources */,
 				A429A5E42259046B00C4AB81 /* Date.swift in Sources */,
 				A4FC5DE42256CFDA007E6542 /* UIColor.swift in Sources */,
 				A44F7EE0224468D800E48FE9 /* MainViewController.swift in Sources */,

@@ -91,7 +91,7 @@ class DayView: UIView {
 
 extension DayView {
     func setupView() {
-        backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
     
     fileprivate func setupCollectionView() {
@@ -150,7 +150,7 @@ extension DayView {
     }
     
     func scrollToTop() {
-        collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        collectionView.setContentOffset(CGPoint(x: 0, y: -50), animated: true)
     }
 }
 

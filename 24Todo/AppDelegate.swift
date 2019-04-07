@@ -19,8 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         let navigationController = AlwaysLargeNavController(rootViewController: MainViewController())
-        
+
         window = UIWindow()
+        window?.backgroundColor = .white
         window?.makeKeyAndVisible()
         window?.rootViewController = navigationController
         

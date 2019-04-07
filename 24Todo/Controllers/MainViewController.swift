@@ -51,6 +51,13 @@ class MainViewController: UIViewController {
         dragView.alpha = 1
         dragView.isHidden = false
     }
+    
+    func pushItemViewController(withItem item : Item) {
+        let itemViewController = ItemViewController()
+        itemViewController.item = item
+        navigationController?.pushViewController(itemViewController, animated: true)
+    }
+
 }
 
 // MARK: - HandleFunctions
@@ -147,7 +154,8 @@ extension MainViewController {
         let velocity = gesture.velocity(in: view).y
         
         listViewOriginalCenter = listView.center
-        guard let navBarHeight = navigationController?.navigationBar.frame.maxY else { return }
+        guard var navBarHeight = navigationController?.navigationBar.frame.maxY else { return }
+        navBarHeight = 0
         let leeway: CGFloat = 50
         let listViewHeight = listView.frame.minY
         
@@ -213,18 +221,24 @@ extension MainViewController {
 extension MainViewController {
     fileprivate func setupView() {
         view.backgroundColor = .white
-        
+
         setupNavBar()
     }
     
     fileprivate func setupNavBar() {
         navigationItem.title = "Todo"
+        //navigationItem.largeTitleDisplayMode = .always
+        //navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        
+        navigationController?.navigationBar.isTranslucent = false
+        //navigationController?.view.backgroundColor = .white
+        navigationController?.navigationBar.backgroundColor = .white
         navigationController?.navigationBar.prefersLargeTitles = true
-
-        navigationController?.navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         navigationController?.navigationBar.clipsToBounds = true
+        navigationController?.navigationBar.tintColor = Theme.theme.titleTextColor
+        
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor : Theme.theme.titleTextColor,
                                                                         .font: Theme.theme.titleLargeFont]
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : Theme.theme.titleTextColor,
@@ -263,7 +277,8 @@ extension MainViewController {
     }
     
     fileprivate func setupListView() {
-        listView = ListView(frame: CGRect(x: 0, y: 140, width: view.frame.width, height: view.frame.height))
+        listView = ListView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        listView.delegate = self
         listView.updateForConnect()
         view.addSubview(listView)
     }

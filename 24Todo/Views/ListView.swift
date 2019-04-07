@@ -18,6 +18,8 @@ class ListView: UIView {
         }
     }
     
+    weak var delegate: MainViewController?
+    
     let indicator = UIView()
     let searchBar = UISearchBar()
     var collectionView: UICollectionView!
@@ -133,6 +135,10 @@ extension ListView:  UICollectionViewDelegate, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate!.pushItemViewController(withItem: items[indexPath.row])
     }
 }
 
