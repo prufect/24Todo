@@ -85,7 +85,7 @@ class ItemView: UIView {
     }
     
     fileprivate func setDotView() {
-        dotView.backgroundColor = item.color
+        dotView.backgroundColor = Theme.theme.colorMap[item.color]
         dotView.frame = CGRect(x: 0, y: 0, width: Theme.theme.itemDotSize, height: Theme.theme.itemDotSize)
         dotView.layer.cornerRadius = CGFloat(Theme.theme.itemDotSize/2)
         
@@ -100,7 +100,7 @@ class ItemView: UIView {
     
     func setupDraggableView() {
         draggableView = UIView(frame: CGRect(x: bgView.frame.minX, y: bgView.frame.maxY-10, width: frame.width, height: CGFloat(10)))
-        draggableView.backgroundColor = item.color
+        draggableView.backgroundColor = Theme.theme.colorMap[item.color]
         
         panGesture = (UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
@@ -170,7 +170,7 @@ class ItemView: UIView {
     }
     
     func convertView() {
-        bgView.backgroundColor = item.color
+        bgView.backgroundColor = Theme.theme.colorMap[item.color]
         bgView.alpha = 0.6
         
         addSubview(bgView)

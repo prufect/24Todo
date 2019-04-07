@@ -29,13 +29,13 @@ class ListView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setupDummyItems()
+        //setupDummyItems()
 
         setupView()
         setupSearchBar()
         setupCollectionView(frame)
         setupIndicator()
-        
+    
     }
     
     func getCellAt(location: CGPoint, foundCell: (Item, CGRect) -> ()) {

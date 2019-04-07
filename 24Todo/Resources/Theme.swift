@@ -16,10 +16,11 @@ class Theme {
     let descriptionTextColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
     let itemTextColor = #colorLiteral(red: 0.1684054434, green: 0.1795276701, blue: 0.1965225041, alpha: 1)
     
+    
     let itemColors = [#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.5972624421, green: 0.4536020756, blue: 0.9493510127, alpha: 1), #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1), #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1), #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1), #colorLiteral(red: 1, green: 0.2907092571, blue: 0.4144412279, alpha: 1)]
+    let colorMap: [String: UIColor] = ["blue": #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)]
     //let itemColors = [#colorLiteral(red: 0.2588235438, green: 0.1313142123, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1), #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1), #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1), #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1)]
 
-    
     let titleLargeFont = UIFont(name: "Montserrat-Bold", size: 42)!
     let titleFont = UIFont(name: "Montserrat-Bold", size: 21)!
     let titleBackFont = UIFont(name: "Montserrat-Bold", size: 18)!

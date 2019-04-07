@@ -15,7 +15,7 @@ class Item: Equatable {
     var startDate: Date?
     var endDate: Date?
     var isDone: Bool = false
-    var color: UIColor
+    var color: String
     
     var length: Int {
         get {
@@ -37,7 +37,7 @@ class Item: Equatable {
         self.title = title
         self.startDate = startDate
         self.endDate = endDate
-        self.color = Theme.theme.itemColors.randomElement()!
+        self.color = "blue"
     }
     
     static func == (lhs: Item, rhs: Item) -> Bool {
