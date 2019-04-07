@@ -112,7 +112,12 @@ class ItemView: UIView {
     }
     
     @objc fileprivate func handleItemCompletionTapped() {
-        item.isDone = true
-        dotAnimationView.play()
+        item.isDone = !item.isDone
+        
+        if item.isDone {
+            dotAnimationView.play()
+        } else {
+            dotAnimationView.animationProgress = 0
+        }
     }
 }

@@ -53,6 +53,10 @@ class MainViewController: UIViewController {
 // MARK: - HandleFunctions
 extension MainViewController {
     
+    @objc fileprivate func handleNavBarTapped() {
+        dayView.scrollToTop()
+    }
+    
     @objc fileprivate func handleLongPressGesture(gesture: UILongPressGestureRecognizer) {
         switch gesture.state {
         case .began:
@@ -157,6 +161,7 @@ extension MainViewController {
             if navigationItem.title != "Today" {
                 animateTitle(newTitle: "Today")
             }
+            dayView.setupCurrentTimeView()
         }
         
         let bottomBarrier: CGFloat = 140
@@ -201,16 +206,18 @@ extension MainViewController {
     
     fileprivate func setupNavBar() {
         navigationItem.title = "Todo"
-        
         navigationController?.navigationBar.prefersLargeTitles = true
+
+        navigationController?.navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+        navigationController?.navigationBar.clipsToBounds = true
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor : Theme.theme.titleTextColor,
                                                                         .font: Theme.theme.titleLargeFont]
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : Theme.theme.titleTextColor,
                                                                    .font: Theme.theme.titleFont]
-        navigationController?.navigationBar.clipsToBounds = true
-        
+
+        navigationController?.navigationBar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleNavBarTapped)))
     }
     
     fileprivate func animateTitle(newTitle: String) {

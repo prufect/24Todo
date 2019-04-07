@@ -13,6 +13,7 @@ class DayView: UIView {
     // MARK :- Properties
     
     var collectionView: UICollectionView!
+    var currentTimeView: UIView!
     var shadowView: UIView!
     
     let eventStore = EKEventStore.init()
@@ -27,6 +28,7 @@ class DayView: UIView {
         setupView()
         setupCollectionView()
         setupShadowView()
+        //setupCurrentTimeView()
         checkCalendarAuthorizationStatus()
     }
     
@@ -106,6 +108,36 @@ extension DayView {
         shadowView.layer.shadowRadius = 3
         
         addSubview(shadowView)
+    }
+    
+    func setupCurrentTimeView() {
+        
+        let currentDate = Date()
+        let currentHour = Calendar.current.component(.hour, from: currentDate)
+        let currentMinute = Calendar.current.component(.minute, from: currentDate)
+        let currentTime = (currentHour * 60) + currentMinute
+        
+        var scrollOffset = currentTime
+        
+        if scrollOffset > 950 {
+            scrollOffset = 950
+        }
+        
+        if scrollOffset < 100 {
+            scrollOffset = 100
+        }
+        
+        currentTimeView = UIView(frame: CGRect(x: frame.minX, y: CGFloat(currentTime), width: frame.width, height: CGFloat(3)))
+        currentTimeView.backgroundColor = Theme.theme.titleTextColor
+        currentTimeView.layer.cornerRadius = 5
+        
+        collectionView.addSubview(currentTimeView)
+        collectionView.setContentOffset(CGPoint(x: 0, y: scrollOffset - 100), animated: true)
+//        collectionView.scrollRectToVisible(currentTimeView.frame, animated: true)
+    }
+    
+    func scrollToTop() {
+        collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
 }
 
