@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import Lottie
 
 class ItemView: UIView {
     
     let titleLabel = UILabel()
     let dateLabel = UILabel()
     let dotView = UIView()
+    let dotAnimationView = LOTAnimationView(name: "ItemCompletionAnimation")
     let bgView = UIView()
     
     var item: Item! {
@@ -29,7 +31,7 @@ class ItemView: UIView {
         addSubview(titleLabel)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.leadingAnchor.constraint(equalTo: dotView.trailingAnchor, constant: 6).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: dotAnimationView.trailingAnchor, constant: -11).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 16).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0).isActive = true
     }
@@ -49,6 +51,22 @@ class ItemView: UIView {
 //        }
     }
     
+    fileprivate func setDotAnimationView() {
+        dotAnimationView.frame = CGRect(x: 0, y: 0, width: 52, height: 52)
+        dotAnimationView.contentMode = .scaleAspectFill
+        //dotAnimationView.transform = CGAffineTransform.init(scaleX: 1.25, y: 1.25)
+
+        dotAnimationView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleItemCompletionTapped)))
+        
+        addSubview(dotAnimationView)
+        
+        dotAnimationView.translatesAutoresizingMaskIntoConstraints = false
+        dotAnimationView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0).isActive = true
+        dotAnimationView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -3).isActive = true
+        dotAnimationView.widthAnchor.constraint(equalToConstant: 52).isActive = true
+        dotAnimationView.heightAnchor.constraint(equalToConstant: 52).isActive = true
+    }
+    
     fileprivate func setDotView() {
         dotView.backgroundColor = item.color
         dotView.frame = CGRect(x: 0, y: 0, width: Theme.theme.itemDotSize, height: Theme.theme.itemDotSize)
@@ -64,7 +82,8 @@ class ItemView: UIView {
     }
     
     fileprivate func setupView() {
-        setDotView()
+        //setDotView()
+        setDotAnimationView()
         setTitleLabel()
         //setDateLabel()
     }
@@ -79,5 +98,11 @@ class ItemView: UIView {
         bgView.fillSuperview()
         
         dotView.isHidden = true
+        dotAnimationView.isHidden = true
+    }
+    
+    @objc fileprivate func handleItemCompletionTapped() {
+        print("Animate")
+        dotAnimationView.play()
     }
 }

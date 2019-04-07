@@ -25,6 +25,7 @@
 		A429A616225970FD00C4AB81 /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A429A604225970FD00C4AB81 /* Montserrat-ExtraBold.ttf */; };
 		A429A618225971AF00C4AB81 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A429A617225971AF00C4AB81 /* Theme.swift */; };
 		A429A61A225985D700C4AB81 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A429A619225985D700C4AB81 /* UITextField.swift */; };
+		A429A6472259B1E000C4AB81 /* ItemCompletionAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = A429A6462259B1E000C4AB81 /* ItemCompletionAnimation.json */; };
 		A44F7EDE224468D800E48FE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44F7EDD224468D800E48FE9 /* AppDelegate.swift */; };
 		A44F7EE0224468D800E48FE9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44F7EDF224468D800E48FE9 /* MainViewController.swift */; };
 		A44F7EE6224468D800E48FE9 /* _4Todo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A44F7EE4224468D800E48FE9 /* _4Todo.xcdatamodeld */; };
@@ -83,6 +84,7 @@
 		A429A604225970FD00C4AB81 /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 		A429A617225971AF00C4AB81 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		A429A619225985D700C4AB81 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		A429A6462259B1E000C4AB81 /* ItemCompletionAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ItemCompletionAnimation.json; sourceTree = "<group>"; };
 		A44F7EDA224468D800E48FE9 /* 24Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 24Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44F7EDD224468D800E48FE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A44F7EDF224468D800E48FE9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +179,14 @@
 				A429A5FA225970FC00C4AB81 /* Montserrat-Thin.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		A429A6452259B1D400C4AB81 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				A429A6462259B1E000C4AB81 /* ItemCompletionAnimation.json */,
+			);
+			path = Animations;
 			sourceTree = "<group>";
 		};
 		A44F7ED1224468D800E48FE9 = {
@@ -282,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				A429A617225971AF00C4AB81 /* Theme.swift */,
+				A429A6452259B1D400C4AB81 /* Animations */,
 				A429A5F22259707700C4AB81 /* Fonts */,
 			);
 			path = Resources;
@@ -320,6 +331,7 @@
 				A44F7ED6224468D800E48FE9 /* Sources */,
 				A44F7ED7224468D800E48FE9 /* Frameworks */,
 				A44F7ED8224468D800E48FE9 /* Resources */,
+				76FC01C468F3E0224E2C31CC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -422,6 +434,7 @@
 				A429A613225970FD00C4AB81 /* Montserrat-Regular.ttf in Resources */,
 				A429A60C225970FD00C4AB81 /* Montserrat-Thin.ttf in Resources */,
 				A429A612225970FD00C4AB81 /* Montserrat-Bold.ttf in Resources */,
+				A429A6472259B1E000C4AB81 /* ItemCompletionAnimation.json in Resources */,
 				A429A60D225970FD00C4AB81 /* Montserrat-SemiBold.ttf in Resources */,
 				A429A606225970FD00C4AB81 /* Montserrat-ExtraLight.ttf in Resources */,
 				A44F7EE8224468D800E48FE9 /* Assets.xcassets in Resources */,
@@ -491,6 +504,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		76FC01C468F3E0224E2C31CC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-24Todo/Pods-24Todo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-24Todo/Pods-24Todo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A151F0AE18DD3968430DEE79 /* [CP] Check Pods Manifest.lock */ = {

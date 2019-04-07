@@ -12,7 +12,7 @@ class Item {
     var title: String
     var startDate: Date?
     var endDate: Date?
-    var isEmpty: Bool = false
+    var isDone: Bool = false
     var color: UIColor
     
     var length: Int {

@@ -142,7 +142,7 @@ extension ListView {
         searchBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         searchBar.clipsToBounds = true
         searchBar.setImage(#imageLiteral(resourceName: "searchBarIcon").withRenderingMode(.alwaysTemplate), for: .search, state: .normal)
-        searchBar.tintColor = .lightGray
+        searchBar.tintColor = #colorLiteral(red: 0.6823529412, green: 0.7294117647, blue: 0.7607843137, alpha: 1)
         
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as! UITextField
         textFieldInsideSearchBar.font = Theme.theme.itemListFont
