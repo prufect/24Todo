@@ -12,7 +12,11 @@ class ListView: UIView {
     // MARK :- Properties
     
     var items = [Item]()
-    var filteredItems = [Item]()
+    var filteredItems = [Item]() {
+        didSet {
+            filteredItems = sortByDone(items: filteredItems)
+        }
+    }
     
     let indicator = UIView()
     let searchBar = UISearchBar()
@@ -52,6 +56,12 @@ class ListView: UIView {
             }
         }
     }
+    
+    func sortByDone(items: [Item]) -> [Item] {
+        return items.sorted(by: { (item1, item2) -> Bool in
+            !item1.isDone && item2.isDone
+        })
+    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -66,9 +76,12 @@ extension ListView: UISearchBarDelegate {
             filteredItems = items.filter({ (item) -> Bool in
                 item.title.contains(searchText)
             })
+            
         } else {
             filteredItems = items
         }
+        
+        filteredItems = sortByDone(items: filteredItems)
         
         collectionView.reloadData()
     }
@@ -88,6 +101,10 @@ extension ListView: UISearchBarDelegate {
         
         // Reload Table View with all Items
         filteredItems = items
+        
+        filteredItems = sortByDone(items: filteredItems)
+
+        
         collectionView.reloadData()
         
         // Reset SearchBar Text
@@ -176,9 +193,16 @@ extension ListView {
     }
     
     fileprivate func setupDummyItems() {
-        items.append(Item(title: "Do Laundry"))
+        
+        let item = Item(title: "Do Laundry")
+        item.isDone = true
+        
+        let item2 = Item(title: "Walk the Dog")
+        item2.isDone = true
+        
+        items.append(item)
         items.append(Item(title: "Finish App"))
-        items.append(Item(title: "Walk the Dog"))
+        items.append(item2)
         items.append(Item(title: "Take notes at Meeting"))
     }
     
