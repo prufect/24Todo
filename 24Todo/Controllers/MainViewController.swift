@@ -229,8 +229,8 @@ extension MainViewController {
     fileprivate func setupNavBar() {
         navigationItem.title = "Todo"
         //navigationItem.largeTitleDisplayMode = .always
-        //navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        
+        //navigationItem.backBarButtonItem = UIBarButtonItem(title: "Todo", style: .plain, target: self, action: nil)
+
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.view.backgroundColor = .white
         //navigationController?.navigationBar.backgroundColor = .white

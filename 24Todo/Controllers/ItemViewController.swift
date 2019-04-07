@@ -26,7 +26,7 @@ class ItemViewController: UIViewController {
     }
     
     fileprivate func setupNavBar() {
-        navigationItem.title = item.title
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     @objc fileprivate func handleSwipe() {

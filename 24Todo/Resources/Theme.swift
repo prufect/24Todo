@@ -20,8 +20,10 @@ class Theme {
 
     
     let titleLargeFont = UIFont(name: "Montserrat-Bold", size: 42)!
-    let titleFont = UIFont(name: "Montserrat-Bold", size: 24)!
+    let titleFont = UIFont(name: "Montserrat-Bold", size: 21)!
+    let titleBackFont = UIFont(name: "Montserrat-Bold", size: 18)!
 
+    
     let itemListFont = UIFont(name: "Montserrat-Medium", size: 16)!
     //let itemCalendarFont = UIFont(name: "Montserrat-Medium", size: 14)!
     let searchFont = UIFont(name: "Montserrat-Regular", size: 16)!
