@@ -17,6 +17,12 @@ class ItemView: UIView {
     let dotAnimationView = LOTAnimationView(name: "ItemCompletionAnimation")
     let bgView = UIView()
     
+    var draggableView = UIView()
+    var originalBGView: CGRect!
+    var panGesture: UIPanGestureRecognizer?
+    
+    weak var delegate: MainViewController?
+    
     var item: Item! {
         didSet {
             setupView()
@@ -91,10 +97,66 @@ class ItemView: UIView {
         dotView.heightAnchor.constraint(equalToConstant: CGFloat(Theme.theme.itemDotSize)).isActive = true
     }
     
+    func setupDraggableView() {
+        draggableView = UIView(frame: CGRect(x: bgView.frame.minX, y: bgView.frame.maxY, width: frame.width, height: CGFloat(3)))
+        draggableView.backgroundColor = .black
+        draggableView.backgroundColor = Theme.theme.titleTextColor
+        draggableView.layer.cornerRadius = 5
+        
+        panGesture = (UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
+        bgView.addGestureRecognizer(panGesture!)
+
+        
+        addSubview(draggableView)
+    }
+    
+    @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer) {
+        switch gesture.state {
+        case .began:
+            handlePanBegan(gesture)
+        case .changed:
+            handlePanChanged(gesture)
+        case .ended:
+            handlePanEnded(gesture)
+        default:
+            break
+        }
+    }
+    
+    fileprivate func handlePanBegan(_ gesture: UIPanGestureRecognizer) {
+        print("Began")
+        originalBGView = bgView.frame
+    }
+    
+    fileprivate func handlePanChanged(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: self)
+        
+        var updatedHeight = originalBGView.height + translation.y
+        
+        if updatedHeight < 30 {
+            updatedHeight = 30
+        }
+        
+        bgView.frame = CGRect(x: 0, y: 0, width: bgView.frame.width, height: updatedHeight)
+        draggableView.frame = CGRect(x: 0, y: bgView.frame.maxY, width: draggableView.frame.width, height: draggableView.frame.height)
+        
+        print(bgView.frame)
+    }
+    
+    fileprivate func handlePanEnded(_ gesture: UIPanGestureRecognizer) {
+        draggableView.isHidden = true
+        bgView.removeGestureRecognizer(panGesture!)
+        delegate?.handleDrop(withNewLength: Int(bgView.frame.maxY))
+    }
+    
+    
+    
     fileprivate func setupView() {
         //setDotView()
         setDotAnimationView()
         setTitleLabel()
+        
+        //setupDraggableView()
         //setDateLabel()
     }
     

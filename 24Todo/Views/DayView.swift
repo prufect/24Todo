@@ -32,7 +32,7 @@ class DayView: UIView {
         checkCalendarAuthorizationStatus()
     }
     
-    func dropItemAt(location: CGPoint, item: Item) {
+    func dropItemAt(location: CGPoint, item: Item, withSetLength length: Int?) {
         
         let item = item
         
@@ -59,7 +59,12 @@ class DayView: UIView {
         
         let startDate = Calendar.current.date(from: components)!
         
-        let defaultLength = 60
+        var defaultLength = 60
+
+        if let length = length {
+            defaultLength = length
+        }
+        
         let endDate = Calendar.current.date(byAdding: .minute, value: defaultLength, to: startDate)!
         
         item.startDate = startDate

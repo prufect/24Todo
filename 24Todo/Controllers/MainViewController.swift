@@ -17,6 +17,9 @@ class MainViewController: UIViewController {
     var listViewOriginalCenter: CGPoint!
     var totalTransformation: CGFloat = 0
     
+    var dragDropLocation: CGPoint?
+    var dragItem: Item?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -88,15 +91,25 @@ extension MainViewController {
         if dragView.center.y > listView.frame.minY{
             dragView.isHidden = true
         } else {
-            let location = gesture.location(in: dayView.collectionView)
+            dragDropLocation = gesture.location(in: dayView.collectionView)
             
-            dayView.dropItemAt(location: location, item: dragView.item)
-            
-            UIView.animate(withDuration: 0.2, animations: {
-                self.dragView.alpha = 0
-            }) { (true) in
-                self.dragView.isHidden = true
-            }
+            // Change Length
+            dayView.isUserInteractionEnabled = false
+            dragView.delegate = self
+            dragView.setupDraggableView()
+        }
+    }
+    
+    func handleDrop(withNewLength length: Int) {
+         //Drop Stuff
+        dayView.isUserInteractionEnabled = true
+        dayView.dropItemAt(location: dragDropLocation!, item: dragView.item, withSetLength: length)
+        dragView.delegate = nil
+
+        UIView.animate(withDuration: 0.2, animations: {
+            self.dragView.alpha = 0
+        }) { (true) in
+            self.dragView.isHidden = true
         }
     }
     
