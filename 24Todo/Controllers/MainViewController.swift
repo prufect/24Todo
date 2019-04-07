@@ -274,6 +274,7 @@ extension MainViewController {
     
     fileprivate func setupDayView() {
         dayView = DayView(frame: CGRect(x: view.frame.minX, y: view.frame.minY, width: view.frame.width, height: view.frame.height - 160))
+        dayView.delegate = self
         view.addSubview(dayView)
         
         //dayView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)

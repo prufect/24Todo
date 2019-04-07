@@ -99,10 +99,8 @@ class ItemView: UIView {
     }
     
     func setupDraggableView() {
-        draggableView = UIView(frame: CGRect(x: bgView.frame.minX, y: bgView.frame.maxY, width: frame.width, height: CGFloat(3)))
-        draggableView.backgroundColor = .black
-        draggableView.backgroundColor = Theme.theme.titleTextColor
-        draggableView.layer.cornerRadius = 5
+        draggableView = UIView(frame: CGRect(x: bgView.frame.minX, y: bgView.frame.maxY-10, width: frame.width, height: CGFloat(10)))
+        draggableView.backgroundColor = item.color
         
         panGesture = (UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))

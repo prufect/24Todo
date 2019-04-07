@@ -19,6 +19,8 @@ class DayView: UIView {
     let eventStore = EKEventStore.init()
     var calendars = [EKCalendar]()
     var items = [Item]()
+    
+    weak var delegate: MainViewController?
         
     // MARK :- Init
 
@@ -140,7 +142,7 @@ extension DayView {
             scrollOffset = 100
         }
         
-        currentTimeView = UIView(frame: CGRect(x: -10, y: CGFloat(currentTime), width: 58, height: CGFloat(10)))
+        currentTimeView = UIView(frame: CGRect(x: -10, y: CGFloat(currentTime), width: 45, height: CGFloat(10)))
         currentTimeView.backgroundColor = Theme.theme.titleTextColor
         currentTimeView.alpha = 0.3
         currentTimeView.layer.cornerRadius = 10
@@ -237,6 +239,10 @@ extension DayView: UICollectionViewDelegate, UICollectionViewDataSource, CustomC
         cell.item = item
         cell.convertToView()
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate!.pushItemViewController(withItem: items[indexPath.row])
     }
     
     // Custom Calendar Day Layout
