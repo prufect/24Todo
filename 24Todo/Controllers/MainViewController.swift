@@ -116,8 +116,6 @@ extension MainViewController {
     fileprivate func handlePanBegan(gesture: UIPanGestureRecognizer) {
         listViewOriginalCenter = listView.center
         listView.updateForDisconnect()
-        animateTitle(newTitle: "Today")
-
     }
     
     fileprivate func handlePanChanged(gesture: UIPanGestureRecognizer) {
@@ -149,10 +147,16 @@ extension MainViewController {
                 
                 // Remove Corner Radius
                 self.listView.updateForConnect()
-                self.navigationItem.title = "Todo"
-                self.animateTitle(newTitle: "Todo")
+                
+                if self.navigationItem.title != "Todo" {
+                    self.animateTitle(newTitle: "Todo")
+                }
                 
             }, completion: nil)
+        } else {
+            if navigationItem.title != "Today" {
+                animateTitle(newTitle: "Today")
+            }
         }
         
         let bottomBarrier: CGFloat = 140
@@ -205,12 +209,22 @@ extension MainViewController {
                                                                         .font: Theme.theme.titleLargeFont]
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : Theme.theme.titleTextColor,
                                                                    .font: Theme.theme.titleFont]
+        navigationController?.navigationBar.clipsToBounds = true
+        
     }
     
     fileprivate func animateTitle(newTitle: String) {
         let titleAnimation = CATransition()
-        titleAnimation.duration = 0.5
-        titleAnimation.type = CATransitionType.moveIn
+        titleAnimation.duration = 0.2
+        
+        if newTitle == "Todo" {
+            titleAnimation.type = CATransitionType.moveIn
+            titleAnimation.subtype = CATransitionSubtype.fromBottom
+        } else {
+            titleAnimation.type = CATransitionType.push
+            titleAnimation.subtype = CATransitionSubtype.fromTop
+        }
+        
         navigationController?.navigationBar.layer.add(titleAnimation, forKey: "titleAnimation")
         
         self.navigationItem.title = newTitle;
