@@ -11,6 +11,7 @@ import UIKit
 class Item: Equatable {
     let id: UUID
     var title: String
+    var description: String?
     var startDate: Date?
     var endDate: Date?
     var isDone: Bool = false
