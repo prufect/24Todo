@@ -23,7 +23,8 @@ class ItemView: UIView {
     
     fileprivate func setTitleLabel() {
         titleLabel.text = item.title
-        titleLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        titleLabel.font = Theme.theme.itemFont
+        titleLabel.textColor = Theme.theme.itemTextColor
         
         addSubview(titleLabel)
         
@@ -51,16 +52,16 @@ class ItemView: UIView {
     
     fileprivate func setDotView() {
         dotView.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
-        dotView.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-        dotView.layer.cornerRadius = 10
+        dotView.frame = CGRect(x: 0, y: 0, width: Theme.theme.itemDotSize, height: Theme.theme.itemDotSize)
+        dotView.layer.cornerRadius = CGFloat(Theme.theme.itemDotSize/2)
         
         addSubview(dotView)
         
         dotView.translatesAutoresizingMaskIntoConstraints = false
         dotView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0).isActive = true
         dotView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-        dotView.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        dotView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        dotView.widthAnchor.constraint(equalToConstant: CGFloat(Theme.theme.itemDotSize)).isActive = true
+        dotView.heightAnchor.constraint(equalToConstant: CGFloat(Theme.theme.itemDotSize)).isActive = true
     }
     
     fileprivate func setupView() {

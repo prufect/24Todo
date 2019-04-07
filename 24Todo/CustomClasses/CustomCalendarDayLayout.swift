@@ -117,7 +117,7 @@ class CustomCalendarDayLayout: UICollectionViewLayout {
                 index = 12
             }
             
-            atts.title = "\(index):00 \(amOrPm)"
+            atts.title = "\(index) \(amOrPm)"
             atts.frame = CGRect(x: 0, y: 60*indexPath.row, width: Int(computedContentSize.width), height: 60)
             atts.zIndex = -1
             return atts

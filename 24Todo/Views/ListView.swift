@@ -138,10 +138,12 @@ extension ListView {
         searchBar.backgroundImage = UIImage()
         searchBar.delegate = self
         searchBar.returnKeyType = .go
-        
         searchBar.layer.cornerRadius = 8
         searchBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         searchBar.clipsToBounds = true
+        
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as! UITextField
+        textFieldInsideSearchBar.font = Theme.theme.itemFont
         
         addSubview(searchBar)
         

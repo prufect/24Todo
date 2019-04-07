@@ -24,6 +24,8 @@ class HourDecorationView: UICollectionReusableView {
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         if let atts = layoutAttributes as? HourDecorationViewAttributes {
             label.text = atts.title
+            label.font = Theme.theme.calendarBackgroundFont
+            label.textColor = Theme.theme.calendarBackgroundTextColor
         }
     }
     
