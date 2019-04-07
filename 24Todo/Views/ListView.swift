@@ -138,7 +138,7 @@ extension ListView:  UICollectionViewDelegate, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //delegate!.pushItemViewController(withItem: items[indexPath.row])
+        delegate!.pushItemViewController(withItem: filteredItems[indexPath.row])
     }
 }
 
