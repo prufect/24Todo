@@ -33,6 +33,7 @@ class DayView: UIView {
     }
     
     func dropItemAt(location: CGPoint, item: Item) {
+        
         let item = item
         
         // Create Times for Event Based on Drag Location
@@ -64,9 +65,16 @@ class DayView: UIView {
         item.startDate = startDate
         item.endDate = endDate
         
-        items.append(item)
         
-        collectionView.insertItems(at: [IndexPath(row: items.count-1, section: 0)])
+        if let existingItemIndex = items.firstIndex(of: item) {
+            
+            items[existingItemIndex] = item
+            collectionView.reloadData()
+            
+        } else {
+            items.append(item)
+            collectionView.insertItems(at: [IndexPath(row: items.count-1, section: 0)])
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

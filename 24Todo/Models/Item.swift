@@ -8,7 +8,8 @@
 
 import UIKit
 
-class Item {
+class Item: Equatable {
+    let id: UUID
     var title: String
     var startDate: Date?
     var endDate: Date?
@@ -31,9 +32,14 @@ class Item {
     }
     
     init(title: String, startDate: Date? = nil, endDate: Date? = nil) {
+        self.id = UUID.init()
         self.title = title
         self.startDate = startDate
         self.endDate = endDate
         self.color = Theme.theme.itemColors.randomElement()!
+    }
+    
+    static func == (lhs: Item, rhs: Item) -> Bool {
+        return lhs.id == rhs.id
     }
 }
