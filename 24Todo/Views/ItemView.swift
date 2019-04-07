@@ -20,6 +20,7 @@ class ItemView: UIView {
     var draggableView = UIView()
     var originalBGView: CGRect!
     var panGesture: UIPanGestureRecognizer?
+    var tapGesture: UITapGestureRecognizer?
     
     weak var delegate: MainViewController?
     
@@ -104,10 +105,20 @@ class ItemView: UIView {
         draggableView.layer.cornerRadius = 5
         
         panGesture = (UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        
         bgView.addGestureRecognizer(panGesture!)
+        bgView.addGestureRecognizer(tapGesture!)
 
         
         addSubview(draggableView)
+    }
+    
+    @objc fileprivate func handleTap(gesture: UITapGestureRecognizer) {
+        draggableView.isHidden = true
+        bgView.removeGestureRecognizer(panGesture!)
+        bgView.removeGestureRecognizer(tapGesture!)
+        delegate?.handleDrop(withNewLength: 60)
     }
     
     @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer) {
