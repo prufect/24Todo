@@ -213,10 +213,19 @@ extension DayView {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM dd, yyyy"
         
-        let thursday = dateFormatter.date(from: "Apr 04, 2019")!
-        let friday = dateFormatter.date(from: "Apr 05, 2019")!
+        let currentDate = Date()
+        print("Current", currentDate)
         
-        let predicate = eventStore.predicateForEvents(withStart: thursday, end: friday, calendars: calendars)
+        var start = Calendar.current.date(bySetting: .hour, value: 0, of: currentDate)!
+        start = Calendar.current.date(bySetting: .minute, value: 0, of: start)!
+        start = Calendar.current.date(byAdding: .day, value: -1, to: start)!
+        
+        var end = Calendar.current.date(bySetting: .hour, value: 23, of: currentDate)!
+        end = Calendar.current.date(bySetting: .minute, value: 59, of: end)!
+        
+        print(start, end)
+        
+        let predicate = eventStore.predicateForEvents(withStart: start, end: end, calendars: calendars)
         let events = eventStore.events(matching: predicate)
         
         for event in events{
