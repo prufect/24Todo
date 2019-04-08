@@ -37,7 +37,7 @@ class Item: Equatable, Codable {
         self.title = title
         self.startDate = startDate
         self.endDate = endDate
-        self.color = "blue"
+        self.color = "red"
     }
     
     static func == (lhs: Item, rhs: Item) -> Bool {
