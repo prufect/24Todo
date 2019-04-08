@@ -234,6 +234,8 @@ extension DayView {
             
             // Create Actual Event Item
             let item = Item(title: event.title, startDate: startDate, endDate: endDate)
+            item.color = "gray"
+            item.isEvent = true
             items.append(item)
         }
     }
@@ -268,7 +270,10 @@ extension DayView: UICollectionViewDelegate, UICollectionViewDataSource, CustomC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate!.pushItemViewController(withItem: items[indexPath.row])
+        let item = items[indexPath.row]
+        if !item.isEvent {
+            delegate!.pushItemViewController(withItem: items[indexPath.row])
+        }
     }
     
     // Custom Calendar Day Layout

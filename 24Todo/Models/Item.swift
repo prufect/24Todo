@@ -15,6 +15,7 @@ class Item: Equatable, Codable {
     var startDate: Date?
     var endDate: Date?
     var isDone: Bool = false
+    var isEvent: Bool = false
     var color: String
     
     var length: Int {
@@ -37,7 +38,13 @@ class Item: Equatable, Codable {
         self.title = title
         self.startDate = startDate
         self.endDate = endDate
-        self.color = Theme.theme.colorMap.keys.randomElement()!
+        
+        var color = Theme.theme.colorMap.keys.randomElement()!
+        if color == "gray" {
+            color = "blue"
+        }
+        
+        self.color = color
     }
     
     static func == (lhs: Item, rhs: Item) -> Bool {

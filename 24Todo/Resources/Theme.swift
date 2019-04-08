@@ -22,7 +22,8 @@ class Theme {
         "orange": #colorLiteral(red: 0.9176470588, green: 0.4078431373, blue: 0.168627451, alpha: 1),
         "gold": #colorLiteral(red: 0.8784313725, green: 0.7450980392, blue: 0.2980392157, alpha: 1),
         "green": #colorLiteral(red: 0.3176470588, green: 0.6862745098, blue: 0.2117647059, alpha: 1),
-        "purple": #colorLiteral(red: 0.537254902, green: 0.3450980392, blue: 0.8235294118, alpha: 1)
+        "purple": #colorLiteral(red: 0.537254902, green: 0.3450980392, blue: 0.8235294118, alpha: 1),
+        "gray": #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     ]
     
     let titleLargeFont = UIFont(name: "Montserrat-Bold", size: 42)!
