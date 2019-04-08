@@ -15,7 +15,9 @@ class ItemViewController: UIViewController {
     var itemIndex: Int!
     
     var colorIcon: LOTAnimationView!
-    var timeLabel: UILabel!
+    var dashLabel: UILabel!
+    var startTimeTextField: UITextField!
+    var endTimeTextField: UITextField!
     var titleTextView: NamedUITextView!
     var descriptionTextView: NamedUITextView!
     var isDeleted = false
@@ -31,7 +33,11 @@ class ItemViewController: UIViewController {
         setupView()
         setupNavBar()
         setupColorIcon()
+        
         setupStartTime()
+        setupDash()
+        setupEndTime()
+        
         setupTitle()
         setupDescription()
         
@@ -104,27 +110,58 @@ class ItemViewController: UIViewController {
         titleTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         //titleTextView.heightAnchor.constraint(equalToConstant: 200).isActive = true
     }
-
-    fileprivate func setupStartTime() {
-        guard let startDate = item.startDate else { return }
+    
+    fileprivate func setupEndTime() {
         guard let endDate = item.endDate else { return }
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm a"
         
-        let startTime = dateFormatter.string(from: startDate)
         let endTime = dateFormatter.string(from: endDate)
+        
+        endTimeTextField = UITextField()
+        endTimeTextField.text = endTime
+        endTimeTextField.font = Theme.theme.itemListFont
+        
+        view.addSubview(endTimeTextField)
+        
+        endTimeTextField.translatesAutoresizingMaskIntoConstraints = false
+        endTimeTextField.leadingAnchor.constraint(equalTo: dashLabel.trailingAnchor, constant: 0).isActive = true
+        endTimeTextField.centerYAnchor.constraint(equalTo: dashLabel.centerYAnchor, constant: 0).isActive = true
+    }
+    
+    fileprivate func setupDash() {
+        guard let _ = item.startDate else { return }
+        
+        dashLabel = UILabel()
+        dashLabel.text = "  -  "
+        dashLabel.font = Theme.theme.itemListFont
+        
+        view.addSubview(dashLabel)
+        
+        dashLabel.translatesAutoresizingMaskIntoConstraints = false
+        dashLabel.leadingAnchor.constraint(equalTo: startTimeTextField.trailingAnchor, constant: 0).isActive = true
+        dashLabel.centerYAnchor.constraint(equalTo: startTimeTextField.centerYAnchor, constant: 0).isActive = true
 
-        timeLabel = UILabel()
+    }
+
+    fileprivate func setupStartTime() {
+        guard let startDate = item.startDate else { return }
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm a"
         
-        timeLabel.text = "\(startTime) - \(endTime)"
-        timeLabel.font = Theme.theme.itemListFont
+        let startTime = dateFormatter.string(from: startDate)
+
+        startTimeTextField = UITextField()
+        startTimeTextField.text = startTime
+        startTimeTextField.font = Theme.theme.itemListFont
         
-        view.addSubview(timeLabel)
+        view.addSubview(startTimeTextField)
         
-        timeLabel.translatesAutoresizingMaskIntoConstraints = false
-        timeLabel.leadingAnchor.constraint(equalTo: colorIcon.trailingAnchor, constant: 0).isActive = true
-        timeLabel.centerYAnchor.constraint(equalTo: colorIcon.centerYAnchor, constant: 0).isActive = true
+        startTimeTextField.translatesAutoresizingMaskIntoConstraints = false
+        startTimeTextField.leadingAnchor.constraint(equalTo: colorIcon.trailingAnchor, constant: 0).isActive = true
+        startTimeTextField.centerYAnchor.constraint(equalTo: colorIcon.centerYAnchor, constant: 1.5).isActive = true
     }
     
     fileprivate func setupColorIcon() {
