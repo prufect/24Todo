@@ -38,9 +38,9 @@
 		A429A665225AFDA900C4AB81 /* ItemCompletionAnimation_purple.json in Resources */ = {isa = PBXBuildFile; fileRef = A429A65F225AFDA900C4AB81 /* ItemCompletionAnimation_purple.json */; };
 		A429A666225AFDA900C4AB81 /* ItemCompletionAnimation_blue.json in Resources */ = {isa = PBXBuildFile; fileRef = A429A660225AFDA900C4AB81 /* ItemCompletionAnimation_blue.json */; };
 		A429A668225B236800C4AB81 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A429A667225B236800C4AB81 /* ColorPickerView.swift */; };
+		A429A66A225B3A0400C4AB81 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A429A669225B3A0400C4AB81 /* LaunchScreen.storyboard */; };
 		A44F7EDE224468D800E48FE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44F7EDD224468D800E48FE9 /* AppDelegate.swift */; };
 		A44F7EE0224468D800E48FE9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44F7EDF224468D800E48FE9 /* MainViewController.swift */; };
-		A44F7EE6224468D800E48FE9 /* _4Todo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A44F7EE4224468D800E48FE9 /* _4Todo.xcdatamodeld */; };
 		A44F7EE8224468D800E48FE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A44F7EE7224468D800E48FE9 /* Assets.xcassets */; };
 		A44F7EF6224468D800E48FE9 /* _4TodoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44F7EF5224468D800E48FE9 /* _4TodoTests.swift */; };
 		A44F7F01224468D800E48FE9 /* _4TodoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44F7F00224468D800E48FE9 /* _4TodoUITests.swift */; };
@@ -109,10 +109,10 @@
 		A429A65F225AFDA900C4AB81 /* ItemCompletionAnimation_purple.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ItemCompletionAnimation_purple.json; sourceTree = "<group>"; };
 		A429A660225AFDA900C4AB81 /* ItemCompletionAnimation_blue.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ItemCompletionAnimation_blue.json; sourceTree = "<group>"; };
 		A429A667225B236800C4AB81 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
+		A429A669225B3A0400C4AB81 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A44F7EDA224468D800E48FE9 /* 24Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 24Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44F7EDD224468D800E48FE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A44F7EDF224468D800E48FE9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		A44F7EE5224468D800E48FE9 /* _4Todo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = _4Todo.xcdatamodel; sourceTree = "<group>"; };
 		A44F7EE7224468D800E48FE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A44F7EEC224468D800E48FE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A44F7EF1224468D800E48FE9 /* 24TodoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 24TodoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -262,8 +262,8 @@
 				A429A650225AA90D00C4AB81 /* Enums */,
 				A4FC5E0922571686007E6542 /* Resources */,
 				A44F7EE7224468D800E48FE9 /* Assets.xcassets */,
+				A429A669225B3A0400C4AB81 /* LaunchScreen.storyboard */,
 				A44F7EEC224468D800E48FE9 /* Info.plist */,
-				A44F7EE4224468D800E48FE9 /* _4Todo.xcdatamodeld */,
 			);
 			path = 24Todo;
 			sourceTree = "<group>";
@@ -482,6 +482,7 @@
 				A429A606225970FD00C4AB81 /* Montserrat-ExtraLight.ttf in Resources */,
 				A429A662225AFDA900C4AB81 /* ItemCompletionAnimation_gold.json in Resources */,
 				A44F7EE8224468D800E48FE9 /* Assets.xcassets in Resources */,
+				A429A66A225B3A0400C4AB81 /* LaunchScreen.storyboard in Resources */,
 				A429A609225970FD00C4AB81 /* Montserrat-Black.ttf in Resources */,
 				A429A615225970FD00C4AB81 /* Montserrat-Medium.ttf in Resources */,
 				A429A616225970FD00C4AB81 /* Montserrat-ExtraBold.ttf in Resources */,
@@ -621,7 +622,6 @@
 				A429A618225971AF00C4AB81 /* Theme.swift in Sources */,
 				A429A6492259CD8300C4AB81 /* AlwaysLargeNavController.swift in Sources */,
 				A429A61A225985D700C4AB81 /* UITextField.swift in Sources */,
-				A44F7EE6224468D800E48FE9 /* _4Todo.xcdatamodeld in Sources */,
 				A429A64F225AA82200C4AB81 /* NamedUITextView.swift in Sources */,
 				A429A5F122594FBC00C4AB81 /* HourDecorationViewAttributes.swift in Sources */,
 				A429A64B225A76F800C4AB81 /* ItemViewController.swift in Sources */,
@@ -798,7 +798,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "me.prudhvi.-4Todo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -817,7 +817,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "me.prudhvi.-4Todo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -947,19 +947,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		A44F7EE4224468D800E48FE9 /* _4Todo.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				A44F7EE5224468D800E48FE9 /* _4Todo.xcdatamodel */,
-			);
-			currentVersion = A44F7EE5224468D800E48FE9 /* _4Todo.xcdatamodel */;
-			path = _4Todo.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = A44F7ED2224468D800E48FE9 /* Project object */;
 }
