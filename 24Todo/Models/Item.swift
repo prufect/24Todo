@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Item: Equatable {
+class Item: Equatable, Codable {
     let id: UUID
     var title: String
     var description: String?

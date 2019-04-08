@@ -10,8 +10,6 @@ import UIKit
 class ListView: UIView {
     
     // MARK :- Properties
-    
-    var items = [Item]()
     var filteredItems = [Item]() {
         didSet {
             filteredItems = sortByDone(items: filteredItems)
@@ -30,7 +28,7 @@ class ListView: UIView {
         super.init(frame: frame)
         
         //setupDummyItems()
-
+        fetchAllItems()
         setupView()
         setupSearchBar()
         setupCollectionView(frame)
@@ -76,12 +74,12 @@ extension ListView: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // If SearchText is Empty show all Items, otherwise show filteredItems
         if !searchText.isEmpty {
-            filteredItems = items.filter({ (item) -> Bool in
+            filteredItems = Data.data.allItems.filter({ (item) -> Bool in
                 item.title.contains(searchText)
             })
             
         } else {
-            filteredItems = items
+            filteredItems = Data.data.allItems
         }
         
         filteredItems = sortByDone(items: filteredItems)
@@ -95,7 +93,7 @@ extension ListView: UISearchBarDelegate {
         
         // Create New Item
         let newItem = Item(title: searchBar.text!)
-        items.insert(newItem, at: 0)
+        Data.data.allItems.insert(newItem, at: 0)
         filteredItems.insert(newItem, at: 0)
         
         // Insert New Item for Animation
@@ -103,7 +101,7 @@ extension ListView: UISearchBarDelegate {
         collectionView.insertItems(at: [indexPath])
         
         // Reload Table View with all Items
-        filteredItems = items
+        filteredItems = Data.data.allItems
         
         filteredItems = sortByDone(items: filteredItems)
 
@@ -183,7 +181,7 @@ extension ListView {
     fileprivate func setupCollectionView(_ frame: CGRect) {
         collectionView = UICollectionView(frame: frame, collectionViewLayout: UICollectionViewFlowLayout())
         
-        filteredItems = items
+        filteredItems = Data.data.allItems
 
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -207,10 +205,14 @@ extension ListView {
         let item2 = Item(title: "Walk the Dog")
         item2.isDone = true
         
-        items.append(item)
-        items.append(Item(title: "Finish App"))
-        items.append(item2)
-        items.append(Item(title: "Take notes at Meeting"))
+        Data.data.allItems.append(item)
+        Data.data.allItems.append(Item(title: "Finish App"))
+        Data.data.allItems.append(item2)
+        Data.data.allItems.append(Item(title: "Take notes at Meeting"))
+    }
+    
+    fileprivate func fetchAllItems() {
+        Data.data.getItems()
     }
     
     fileprivate func setupIndicator() {

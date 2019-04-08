@@ -31,6 +31,7 @@
 		A429A64F225AA82200C4AB81 /* NamedUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A429A64E225AA82200C4AB81 /* NamedUITextView.swift */; };
 		A429A652225AA91F00C4AB81 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = A429A651225AA91F00C4AB81 /* Enums.swift */; };
 		A429A656225AB28E00C4AB81 /* InputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A429A655225AB28E00C4AB81 /* InputAccessoryView.swift */; };
+		A429A65A225AD51800C4AB81 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A429A659225AD51800C4AB81 /* Data.swift */; };
 		A44F7EDE224468D800E48FE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44F7EDD224468D800E48FE9 /* AppDelegate.swift */; };
 		A44F7EE0224468D800E48FE9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44F7EDF224468D800E48FE9 /* MainViewController.swift */; };
 		A44F7EE6224468D800E48FE9 /* _4Todo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A44F7EE4224468D800E48FE9 /* _4Todo.xcdatamodeld */; };
@@ -95,6 +96,7 @@
 		A429A64E225AA82200C4AB81 /* NamedUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NamedUITextView.swift; path = "/Users/prudhvi/Google Drive/Code/_Swift/24Todo/24Todo/CustomClasses/NamedUITextView.swift"; sourceTree = "<absolute>"; };
 		A429A651225AA91F00C4AB81 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		A429A655225AB28E00C4AB81 /* InputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAccessoryView.swift; sourceTree = "<group>"; };
+		A429A659225AD51800C4AB81 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		A44F7EDA224468D800E48FE9 /* 24Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 24Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44F7EDD224468D800E48FE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A44F7EDF224468D800E48FE9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 		A4FC5E0922571686007E6542 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A429A659225AD51800C4AB81 /* Data.swift */,
 				A429A617225971AF00C4AB81 /* Theme.swift */,
 				A429A6452259B1D400C4AB81 /* Animations */,
 				A429A5F22259707700C4AB81 /* Fonts */,
@@ -586,6 +589,7 @@
 				A4FC5DE32256CFDA007E6542 /* UIView.swift in Sources */,
 				A429A5E82259056A00C4AB81 /* CustomCalendarDayLayout.swift in Sources */,
 				A471E020224F186300AA30B0 /* ItemView.swift in Sources */,
+				A429A65A225AD51800C4AB81 /* Data.swift in Sources */,
 				A471E0222251ADC500AA30B0 /* DayView.swift in Sources */,
 				A429A5EA22593D8800C4AB81 /* HourDecorationView.swift in Sources */,
 				A471E01B224F055A00AA30B0 /* ItemCell.swift in Sources */,

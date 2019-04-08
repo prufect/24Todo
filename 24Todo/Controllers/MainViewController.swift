@@ -32,7 +32,8 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        listView.collectionView.reloadData()
+        dayView.collectionView.reloadData()
         setupNotificationObservers()
     }
     
