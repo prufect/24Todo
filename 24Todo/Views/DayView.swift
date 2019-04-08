@@ -41,14 +41,14 @@ class DayView: UIView {
         
         // Create Times for Event Based on Drag Location
         var dropTime = Int(location.y) - 30
-        print("DropTime", dropTime)
+        //print("DropTime", dropTime)
 
         if dropTime < 0 { dropTime = 0 }
 
         let minute = dropTime % 60
-        print("DropMinute", minute)
+        //print("DropMinute", minute)
         let hour = Int(dropTime / 60)
-        print("DropHour", hour)
+        //print("DropHour", hour)
         let day = 4
         let month = 4
         let year = 2019

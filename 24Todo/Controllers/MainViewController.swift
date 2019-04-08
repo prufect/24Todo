@@ -23,8 +23,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("Loading")
-        
         setupView()
         setupDayView()
         setupListView()
@@ -35,7 +33,7 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        print("Appearing")
+        print("On Load")
         listView.filteredItems = Data.data.allItems
         listView.collectionView.reloadData()
         dayView.collectionView.reloadData()
@@ -94,7 +92,7 @@ extension MainViewController {
         
         listView.getCellAt(location: location) { (item, frame) in
             createItemView(ofItem: item, withFrame: frame)
-            print(item.title)
+            //print(item.title)
         }
     }
     

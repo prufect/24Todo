@@ -37,7 +37,7 @@ class Item: Equatable, Codable {
         self.title = title
         self.startDate = startDate
         self.endDate = endDate
-        self.color = "red"
+        self.color = Theme.theme.colorMap.keys.randomElement()!
     }
     
     static func == (lhs: Item, rhs: Item) -> Bool {

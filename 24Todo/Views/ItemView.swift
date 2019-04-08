@@ -13,8 +13,7 @@ class ItemView: UIView {
     
     let titleLabel = UILabel()
     let dateLabel = UILabel()
-    let dotView = UIView()
-    let dotAnimationView = LOTAnimationView(name: "ItemCompletionAnimation")
+    var dotAnimationView: LOTAnimationView!
     let bgView = UIView()
     
     var draggableView = UIView()
@@ -43,59 +42,28 @@ class ItemView: UIView {
         titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0).isActive = true
     }
     
-    fileprivate func setDateLabel() {
-//        if let startTime = item.startTime, let length = item.length {
-//            dateLabel.text = "\(startTime) - \(length)"
-//            dateLabel.font = UIFont.systemFont(ofSize: 8, weight: .light)
-//
-//            addSubview(dateLabel)
-//
-//            dateLabel.translatesAutoresizingMaskIntoConstraints = false
-//            dateLabel.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 3).isActive = true
-//            dateLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: 16).isActive = true
-//            dateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 16).isActive = true
-//            dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 8).isActive = true
-//        }
-    }
-    
     fileprivate func setDotAnimationView() {
-        
-
-        
+        dotAnimationView = LOTAnimationView(name: "ItemCompletionAnimation_\(item.color)")
         dotAnimationView.frame = CGRect(x: 0, y: 0, width: 52, height: 52)
         dotAnimationView.contentMode = .scaleAspectFill
-        //dotAnimationView.transform = CGAffineTransform.init(scaleX: 1.25, y: 1.25)
 
         dotAnimationView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleItemCompletionTapped)))
         
         if item.isDone {
             dotAnimationView.animationProgress = 1
-            print(item.isDone)
+            //print(item.isDone)
         } else {
             dotAnimationView.animationProgress = 0
         }
         
         addSubview(dotAnimationView)
+        //print("adding dot animationView for \(item.title)")
         
         dotAnimationView.translatesAutoresizingMaskIntoConstraints = false
         dotAnimationView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0).isActive = true
         dotAnimationView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -3).isActive = true
         dotAnimationView.widthAnchor.constraint(equalToConstant: 52).isActive = true
         dotAnimationView.heightAnchor.constraint(equalToConstant: 52).isActive = true
-    }
-    
-    fileprivate func setDotView() {
-        dotView.backgroundColor = Theme.theme.colorMap[item.color]
-        dotView.frame = CGRect(x: 0, y: 0, width: Theme.theme.itemDotSize, height: Theme.theme.itemDotSize)
-        dotView.layer.cornerRadius = CGFloat(Theme.theme.itemDotSize/2)
-        
-        addSubview(dotView)
-        
-        dotView.translatesAutoresizingMaskIntoConstraints = false
-        dotView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0).isActive = true
-        dotView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-        dotView.widthAnchor.constraint(equalToConstant: CGFloat(Theme.theme.itemDotSize)).isActive = true
-        dotView.heightAnchor.constraint(equalToConstant: CGFloat(Theme.theme.itemDotSize)).isActive = true
     }
     
     func setupDraggableView() {
@@ -133,7 +101,7 @@ class ItemView: UIView {
     }
     
     fileprivate func handlePanBegan(_ gesture: UIPanGestureRecognizer) {
-        print("Began")
+        //print("Began")
         originalBGView = bgView.frame
     }
     
@@ -149,7 +117,7 @@ class ItemView: UIView {
         bgView.frame = CGRect(x: 0, y: 0, width: bgView.frame.width, height: updatedHeight)
         draggableView.frame = CGRect(x: 0, y: bgView.frame.maxY, width: draggableView.frame.width, height: draggableView.frame.height)
         
-        print(bgView.frame)
+        //print(bgView.frame)
     }
     
     fileprivate func handlePanEnded(_ gesture: UIPanGestureRecognizer) {
@@ -158,15 +126,9 @@ class ItemView: UIView {
         delegate?.handleDrop(withNewLength: Int(bgView.frame.maxY))
     }
     
-    
-    
     fileprivate func setupView() {
-        //setDotView()
         setDotAnimationView()
         setTitleLabel()
-        
-        //setupDraggableView()
-        //setDateLabel()
     }
     
     func convertView() {
@@ -178,7 +140,6 @@ class ItemView: UIView {
         
         bgView.fillSuperview()
         
-        dotView.isHidden = true
         dotAnimationView.isHidden = true
     }
     

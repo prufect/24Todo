@@ -26,7 +26,7 @@ class ItemViewController: UIViewController {
         itemIndex = Data.data.allItems.firstIndex(where: { (searchItem) -> Bool in
             searchItem.id == item.id
         })
-        print(itemIndex!, Data.data.allItems[itemIndex].title)
+        //print(itemIndex!, Data.data.allItems[itemIndex].title)
         
         setupView()
         setupNavBar()
@@ -47,7 +47,6 @@ class ItemViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         if !isDeleted {
-            print("Updating item ", itemIndex!)
             item.title = titleTextView.text
             item.description = descriptionTextView.text
             Data.data.allItems[itemIndex] = item
@@ -131,7 +130,7 @@ class ItemViewController: UIViewController {
     fileprivate func setupColorIcon() {
         
         let itemDotSize = Theme.theme.itemDotSize * 5
-        colorIcon = LOTAnimationView(name: "ItemCompletionAnimation")
+        colorIcon = LOTAnimationView(name: "ItemCompletionAnimation_\(item.color)")
         colorIcon.frame = CGRect(x: 0, y: 0, width: itemDotSize, height: itemDotSize)
         colorIcon.layer.cornerRadius = CGFloat(itemDotSize / 2)
         colorIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDone)))
@@ -180,7 +179,6 @@ class ItemViewController: UIViewController {
     
     @objc fileprivate func handleDelete() {
         isDeleted = true
-        print("deleting: ", Data.data.allItems[itemIndex].title)
         Data.data.deleteItem(atIndex: itemIndex)
         
         navigationController?.popViewController(animated: true)
@@ -193,9 +191,9 @@ extension ItemViewController: UITextViewDelegate {
         
         switch textView.name! {
         case .title:
-            print(textView.text!)
+            break
         case .description:
-            print(textView.text!)
+            break
         }
     }
     
@@ -204,7 +202,7 @@ extension ItemViewController: UITextViewDelegate {
         
         switch textView.name! {
         case .title:
-            print(textView.text!)
+            break
         case .description:
             if textView.text == "Enter more details here ... " {
                 textView.text = ""

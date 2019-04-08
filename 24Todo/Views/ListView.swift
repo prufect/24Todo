@@ -13,6 +13,10 @@ class ListView: UIView {
     var filteredItems = [Item]() {
         didSet {
             filteredItems = sortByDone(items: filteredItems)
+            print("setting filtered Items")
+            for item in filteredItems {
+                print(item.title)
+            }
         }
     }
     
@@ -29,8 +33,8 @@ class ListView: UIView {
         super.init(frame: frame)
         
         //setupDummyItems()
-        
         //setupBackgroundView()
+        
         fetchAllItems()
         setupView()
         setupSearchBar()
@@ -125,7 +129,6 @@ extension ListView: UISearchBarDelegate {
 //MARK:- Collection View Functions
 extension ListView:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(Data.data.allItems.count)
         return filteredItems.count
     }
     
@@ -182,10 +185,6 @@ extension ListView {
         let doneBarButton = UIBarButtonItem(title: "Hide Keyboard", style: .plain, target: self, action: #selector(dismissKeyboard))
         doneBarButton.setTitleTextAttributes([NSAttributedString.Key.font : Theme.theme.itemListFont], for: .normal)
         doneBarButton.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : Theme.theme.itemTextColor], for: .normal)
-        doneBarButton.setTitleTextAttributes([NSAttributedString.Key.font : Theme.theme.itemListFont], for: .selected)
-        doneBarButton.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : Theme.theme.itemTextColor], for: .selected)
-        doneBarButton.setTitleTextAttributes([NSAttributedString.Key.font : Theme.theme.itemListFont], for: .highlighted)
-        doneBarButton.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : Theme.theme.itemTextColor], for: .highlighted)
 
         keyboardToolbar.items = [flexBarButton, doneBarButton]
         searchBar.inputAccessoryView = keyboardToolbar
@@ -205,6 +204,7 @@ extension ListView {
     fileprivate func setupCollectionView(_ frame: CGRect) {
         collectionView = UICollectionView(frame: frame, collectionViewLayout: UICollectionViewFlowLayout())
         
+        print("Setup --------")
         filteredItems = Data.data.allItems
 
         collectionView.delegate = self
@@ -263,7 +263,7 @@ extension ListView {
     }
     
     @objc fileprivate func handleTapOnBGView() {
-        print("tapped")
+        //print("tapped")
     }
     
     @objc fileprivate func dismissKeyboard() {
