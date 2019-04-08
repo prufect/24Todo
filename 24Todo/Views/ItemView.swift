@@ -39,7 +39,7 @@ class ItemView: UIView {
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.leadingAnchor.constraint(equalTo: dotAnimationView.trailingAnchor, constant: -11).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 16).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0).isActive = true
     }
     
