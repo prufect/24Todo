@@ -12,6 +12,7 @@ import Lottie
 class ItemViewController: UIViewController {
     
     var item: Item!
+    var itemIndex: Int!
     
     var colorIcon: LOTAnimationView!
     var timeLabel: UILabel!
@@ -20,6 +21,8 @@ class ItemViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        itemIndex = Data.data.allItems.firstIndex(of: item)
         
         setupView()
         setupNavBar()
@@ -35,6 +38,12 @@ class ItemViewController: UIViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         view.addGestureRecognizer(tapGesture)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        item.title = titleTextView.text
+        item.description = descriptionTextView.text
+        Data.data.allItems[itemIndex] = item
     }
     
     fileprivate func setupDescription() {
