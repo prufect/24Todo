@@ -22,6 +22,10 @@ class ItemViewController: UIViewController {
     var descriptionTextView: NamedUITextView!
     var colorPickerView: ColorPickerView!
     
+    var descriptionTextViewBottomAnchor: NSLayoutConstraint!
+    
+//    let descriptionTextViewBottomAnchor: Anchro
+    
     var isDeleted = false
 
     override func viewDidLoad() {
@@ -56,7 +60,17 @@ class ItemViewController: UIViewController {
         view.addGestureRecognizer(UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe)))
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        setupNotificationObservers()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        removeNotificationObservers()
+        
         if !isDeleted {
             item.title = titleTextView.text
             item.description = descriptionTextView.text
@@ -115,7 +129,10 @@ class ItemViewController: UIViewController {
         descriptionTextView.topAnchor.constraint(equalTo: titleTextView.bottomAnchor, constant: 0).isActive = true
         descriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         descriptionTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        descriptionTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -32).isActive = true
+        
+        descriptionTextViewBottomAnchor = descriptionTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -32)
+        descriptionTextViewBottomAnchor.isActive = true
+        
     }
     
     fileprivate func setupTitle() {
@@ -375,6 +392,40 @@ class ItemViewController: UIViewController {
     
     @objc fileprivate func handleSwipe() {
         hideColorPicker()
+    }
+    
+    @objc fileprivate func handleKeyboardShow(notification: Notification) {
+        print("Handle Keyboard Show")
+        
+        guard let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
+        let keyboardFrame = value.cgRectValue
+        descriptionTextViewBottomAnchor.isActive = false
+        
+        descriptionTextViewBottomAnchor = descriptionTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -keyboardFrame.height - 20)
+        
+        descriptionTextViewBottomAnchor.isActive = true
+    }
+    
+    @objc fileprivate func handleKeyboardHide(notification: Notification) {
+        print("Handle Keyboard Hide")
+        // Animate back to original position with Spring
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.descriptionTextViewBottomAnchor.isActive = false
+            self.descriptionTextViewBottomAnchor = self.descriptionTextView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -32)
+            self.descriptionTextViewBottomAnchor.isActive = true
+        }, completion: nil)
+    }
+    
+    fileprivate func setupNotificationObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(handleDidLongPressOnCell), name: Notification.Name.didLongPressOnCell, object: nil)
+    }
+    
+    fileprivate func removeNotificationObservers() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        //NotificationCenter.default.removeObserver(self, name: Notification.Name.didLongPressOnCell, object: nil)
     }
 }
 
