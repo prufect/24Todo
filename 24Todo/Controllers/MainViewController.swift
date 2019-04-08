@@ -33,7 +33,6 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        print("On Load")
         listView.filteredItems = Data.data.allItems
         listView.collectionView.reloadData()
         dayView.collectionView.reloadData()

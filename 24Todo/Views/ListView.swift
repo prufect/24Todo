@@ -13,10 +13,6 @@ class ListView: UIView {
     var filteredItems = [Item]() {
         didSet {
             filteredItems = sortByDone(items: filteredItems)
-            print("setting filtered Items")
-            for item in filteredItems {
-                print(item.title)
-            }
         }
     }
     
@@ -204,7 +200,6 @@ extension ListView {
     fileprivate func setupCollectionView(_ frame: CGRect) {
         collectionView = UICollectionView(frame: frame, collectionViewLayout: UICollectionViewFlowLayout())
         
-        print("Setup --------")
         filteredItems = Data.data.allItems
 
         collectionView.delegate = self
