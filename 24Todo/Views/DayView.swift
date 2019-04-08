@@ -28,6 +28,7 @@ class DayView: UIView {
         super.init(frame: frame)
         
         setupView()
+        loadItems()
         setupCollectionView()
         setupShadowView()
         //setupCurrentTimeView()
@@ -81,6 +82,17 @@ class DayView: UIView {
         } else {
             items.append(item)
             collectionView.insertItems(at: [IndexPath(row: items.count-1, section: 0)])
+        }
+    }
+    
+    func loadItems() {
+        Data.data.getItems()
+        let itemsWithTimes = Data.data.allItems.filter { (item) -> Bool in
+            item.startDate != nil
+        }
+                
+        for item in itemsWithTimes {
+            items.append(item)
         }
     }
     
