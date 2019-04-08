@@ -238,6 +238,7 @@ class ItemViewController: UIViewController {
         colorIcon.frame = CGRect(x: 0, y: 0, width: itemDotSize, height: itemDotSize)
         colorIcon.layer.cornerRadius = CGFloat(itemDotSize / 2)
         colorIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDone)))
+        colorIcon.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress)))
         
         if item.isDone {
             colorIcon.animationProgress = 1
@@ -265,6 +266,30 @@ class ItemViewController: UIViewController {
     
     fileprivate func setupNavBar() {
         navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
+    fileprivate func handleLongPressBegan() {
+        let colorPickerView = ColorPickerView(frame: CGRect(x: 40, y: view.frame.height, width: view.frame.width-80, height: 150))
+        
+        view.addSubview(colorPickerView)
+                
+        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+            colorPickerView.transform = CGAffineTransform(translationX: 0, y: -180)
+        }, completion: nil)
+    }
+    
+    @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
+        
+        switch gesture.state {
+        case .began:
+            handleLongPressBegan()
+        case .changed:
+            break
+        case.ended:
+            break
+        default:
+            break
+        }
     }
     
     @objc fileprivate func handleEndDatePicker(datePicker: UIDatePicker) {

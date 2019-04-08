@@ -37,6 +37,7 @@
 		A429A664225AFDA900C4AB81 /* ItemCompletionAnimation_orange.json in Resources */ = {isa = PBXBuildFile; fileRef = A429A65E225AFDA900C4AB81 /* ItemCompletionAnimation_orange.json */; };
 		A429A665225AFDA900C4AB81 /* ItemCompletionAnimation_purple.json in Resources */ = {isa = PBXBuildFile; fileRef = A429A65F225AFDA900C4AB81 /* ItemCompletionAnimation_purple.json */; };
 		A429A666225AFDA900C4AB81 /* ItemCompletionAnimation_blue.json in Resources */ = {isa = PBXBuildFile; fileRef = A429A660225AFDA900C4AB81 /* ItemCompletionAnimation_blue.json */; };
+		A429A668225B236800C4AB81 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A429A667225B236800C4AB81 /* ColorPickerView.swift */; };
 		A44F7EDE224468D800E48FE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44F7EDD224468D800E48FE9 /* AppDelegate.swift */; };
 		A44F7EE0224468D800E48FE9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44F7EDF224468D800E48FE9 /* MainViewController.swift */; };
 		A44F7EE6224468D800E48FE9 /* _4Todo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A44F7EE4224468D800E48FE9 /* _4Todo.xcdatamodeld */; };
@@ -107,6 +108,7 @@
 		A429A65E225AFDA900C4AB81 /* ItemCompletionAnimation_orange.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ItemCompletionAnimation_orange.json; sourceTree = "<group>"; };
 		A429A65F225AFDA900C4AB81 /* ItemCompletionAnimation_purple.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ItemCompletionAnimation_purple.json; sourceTree = "<group>"; };
 		A429A660225AFDA900C4AB81 /* ItemCompletionAnimation_blue.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ItemCompletionAnimation_blue.json; sourceTree = "<group>"; };
+		A429A667225B236800C4AB81 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		A44F7EDA224468D800E48FE9 /* 24Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 24Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44F7EDD224468D800E48FE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A44F7EDF224468D800E48FE9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 				A471E0212251ADC500AA30B0 /* DayView.swift */,
 				A471E01F224F186300AA30B0 /* ItemView.swift */,
 				A429A5E922593D8800C4AB81 /* HourDecorationView.swift */,
+				A429A667225B236800C4AB81 /* ColorPickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -627,6 +630,7 @@
 				A44F7EE0224468D800E48FE9 /* MainViewController.swift in Sources */,
 				A44F7EDE224468D800E48FE9 /* AppDelegate.swift in Sources */,
 				A429A5EF22594F6F00C4AB81 /* Protocols.swift in Sources */,
+				A429A668225B236800C4AB81 /* ColorPickerView.swift in Sources */,
 				A4FC5DE22256CFDA007E6542 /* UIimageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
