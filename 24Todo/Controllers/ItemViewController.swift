@@ -78,14 +78,15 @@ class ItemViewController: UIViewController {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "hh:mm a"
             
-            if let startText = startTimeTextField.text {
-                let startDate = dateFormatter.date(from: startText)
-                item.startDate = startDate
-            }
-            if let endText = endTimeTextField.text {
-                let endDate = dateFormatter.date(from: endText)
-                item.endDate = endDate
-            }
+//            if let startText = startTimeTextField.text {
+//                let startDate = dateFormatter.date(from: startText)
+//                item.startDate = startDate
+//            }
+//
+//            if let endText = endTimeTextField.text {
+//                let endDate = dateFormatter.date(from: endText)
+//                item.endDate = endDate
+//            }
             
             item.color = colorPickerView.selectedColor
             
@@ -351,6 +352,7 @@ class ItemViewController: UIViewController {
         
         let time = dateFormatter.string(from: date)
         
+        item.endDate = date
         endTimeTextField.text = time
     }
     
@@ -362,6 +364,7 @@ class ItemViewController: UIViewController {
         
         let time = dateFormatter.string(from: date)
         
+        item.startDate = date
         startTimeTextField.text = time
     }
     
