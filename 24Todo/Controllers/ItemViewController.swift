@@ -34,9 +34,9 @@ class ItemViewController: UIViewController {
         setupNavBar()
         setupColorIcon()
         
-        setupStartTime()
-        setupDash()
         setupEndTime()
+        setupDash()
+        setupStartTime()
         
         setupTitle()
         setupDescription()
@@ -126,8 +126,8 @@ class ItemViewController: UIViewController {
         view.addSubview(endTimeTextField)
         
         endTimeTextField.translatesAutoresizingMaskIntoConstraints = false
-        endTimeTextField.leadingAnchor.constraint(equalTo: dashLabel.trailingAnchor, constant: 0).isActive = true
-        endTimeTextField.centerYAnchor.constraint(equalTo: dashLabel.centerYAnchor, constant: 0).isActive = true
+        endTimeTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -13).isActive = true
+        endTimeTextField.centerYAnchor.constraint(equalTo: colorIcon.centerYAnchor, constant: 1.5).isActive = true
     }
     
     fileprivate func setupDash() {
@@ -140,8 +140,8 @@ class ItemViewController: UIViewController {
         view.addSubview(dashLabel)
         
         dashLabel.translatesAutoresizingMaskIntoConstraints = false
-        dashLabel.leadingAnchor.constraint(equalTo: startTimeTextField.trailingAnchor, constant: 0).isActive = true
-        dashLabel.centerYAnchor.constraint(equalTo: startTimeTextField.centerYAnchor, constant: 0).isActive = true
+        dashLabel.trailingAnchor.constraint(equalTo: endTimeTextField.leadingAnchor, constant: 0).isActive = true
+        dashLabel.centerYAnchor.constraint(equalTo: colorIcon.centerYAnchor, constant: 1.5).isActive = true
 
     }
 
@@ -160,7 +160,7 @@ class ItemViewController: UIViewController {
         view.addSubview(startTimeTextField)
         
         startTimeTextField.translatesAutoresizingMaskIntoConstraints = false
-        startTimeTextField.leadingAnchor.constraint(equalTo: colorIcon.trailingAnchor, constant: 0).isActive = true
+        startTimeTextField.trailingAnchor.constraint(equalTo: dashLabel.leadingAnchor, constant: 0).isActive = true
         startTimeTextField.centerYAnchor.constraint(equalTo: colorIcon.centerYAnchor, constant: 1.5).isActive = true
     }
     
