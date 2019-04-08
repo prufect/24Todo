@@ -125,6 +125,7 @@ extension ListView: UISearchBarDelegate {
 //MARK:- Collection View Functions
 extension ListView:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(Data.data.allItems.count)
         return filteredItems.count
     }
     

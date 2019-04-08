@@ -18,11 +18,15 @@ class ItemViewController: UIViewController {
     var timeLabel: UILabel!
     var titleTextView: NamedUITextView!
     var descriptionTextView: NamedUITextView!
+    var isDeleted = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        itemIndex = Data.data.allItems.firstIndex(of: item)
+        itemIndex = Data.data.allItems.firstIndex(where: { (searchItem) -> Bool in
+            searchItem.id == item.id
+        })
+        print(itemIndex!, Data.data.allItems[itemIndex].title)
         
         setupView()
         setupNavBar()
@@ -33,6 +37,7 @@ class ItemViewController: UIViewController {
         
         // Delete Option
         // Right Bar Button Item?
+        setupDeleteButton()
         
         // Add Top Gesture
         
@@ -41,9 +46,18 @@ class ItemViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        item.title = titleTextView.text
-        item.description = descriptionTextView.text
-        Data.data.allItems[itemIndex] = item
+        if !isDeleted {
+            print("Updating item ", itemIndex!)
+            item.title = titleTextView.text
+            item.description = descriptionTextView.text
+            Data.data.allItems[itemIndex] = item
+        }
+    }
+    
+    fileprivate func setupDeleteButton() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete Item", style: .plain, target: self, action: #selector(handleDelete))
+        
     }
     
     fileprivate func setupDescription() {
@@ -162,6 +176,14 @@ class ItemViewController: UIViewController {
         } else {
             colorIcon.animationProgress = 0
         }
+    }
+    
+    @objc fileprivate func handleDelete() {
+        isDeleted = true
+        print("deleting: ", Data.data.allItems[itemIndex].title)
+        Data.data.deleteItem(atIndex: itemIndex)
+        
+        navigationController?.popViewController(animated: true)
     }
 }
 

@@ -30,4 +30,8 @@ class Data {
             }
         }
     }
+    
+    func deleteItem(atIndex index: Int) {
+        allItems.remove(at: index)
+    }
 }

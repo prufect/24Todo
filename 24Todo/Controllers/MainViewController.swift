@@ -23,6 +23,8 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("Loading")
+        
         setupView()
         setupDayView()
         setupListView()
@@ -32,6 +34,9 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        print("Appearing")
+        listView.filteredItems = Data.data.allItems
         listView.collectionView.reloadData()
         dayView.collectionView.reloadData()
         setupNotificationObservers()
