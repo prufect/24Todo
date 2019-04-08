@@ -33,6 +33,8 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        navigationController?.navigationBar.prefersLargeTitles = false
+
         listView.filteredItems = Data.data.allItems
         listView.collectionView.reloadData()
         dayView.collectionView.reloadData()
