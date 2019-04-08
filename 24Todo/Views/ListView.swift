@@ -178,7 +178,14 @@ extension ListView {
         let keyboardToolbar = UIToolbar()
         keyboardToolbar.sizeToFit()
         let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneBarButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard))
+        let doneBarButton = UIBarButtonItem(title: "Hide Keyboard", style: .plain, target: self, action: #selector(dismissKeyboard))
+        doneBarButton.setTitleTextAttributes([NSAttributedString.Key.font : Theme.theme.itemListFont], for: .normal)
+        doneBarButton.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : Theme.theme.itemTextColor], for: .normal)
+        doneBarButton.setTitleTextAttributes([NSAttributedString.Key.font : Theme.theme.itemListFont], for: .selected)
+        doneBarButton.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : Theme.theme.itemTextColor], for: .selected)
+        doneBarButton.setTitleTextAttributes([NSAttributedString.Key.font : Theme.theme.itemListFont], for: .highlighted)
+        doneBarButton.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : Theme.theme.itemTextColor], for: .highlighted)
+
         keyboardToolbar.items = [flexBarButton, doneBarButton]
         searchBar.inputAccessoryView = keyboardToolbar
         
