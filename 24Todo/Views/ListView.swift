@@ -21,6 +21,7 @@ class ListView: UIView {
     let indicator = UIView()
     let searchBar = UISearchBar()
     var collectionView: UICollectionView!
+    var backgroundView: UIView!
     
     // MARK :- Init
 
@@ -28,11 +29,14 @@ class ListView: UIView {
         super.init(frame: frame)
         
         //setupDummyItems()
+        
+        //setupBackgroundView()
         fetchAllItems()
         setupView()
         setupSearchBar()
         setupCollectionView(frame)
         setupIndicator()
+        
     
     }
     
@@ -71,6 +75,10 @@ class ListView: UIView {
 
 //MARK:- Search Bar Functions {
 extension ListView: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.placeholder = "Now, what would you like to do?"
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // If SearchText is Empty show all Items, otherwise show filteredItems
         if !searchText.isEmpty {
@@ -110,6 +118,7 @@ extension ListView: UISearchBarDelegate {
         
         // Reset SearchBar Text
         searchBar.text = ""
+        searchBar.placeholder = "Try swiping down :)"
     }
 }
 
@@ -153,7 +162,7 @@ extension ListView {
     }
     
     fileprivate func setupSearchBar() {
-        searchBar.placeholder = "Start typing"
+        searchBar.placeholder = "Tap Here"
         searchBar.searchBarStyle = .default
         searchBar.sizeToFit()
         searchBar.isTranslucent = false
@@ -165,6 +174,13 @@ extension ListView {
         searchBar.clipsToBounds = true
         searchBar.setImage(#imageLiteral(resourceName: "searchBarIcon").withRenderingMode(.alwaysTemplate), for: .search, state: .normal)
         searchBar.tintColor = #colorLiteral(red: 0.6823529412, green: 0.7294117647, blue: 0.7607843137, alpha: 1)
+        
+        let keyboardToolbar = UIToolbar()
+        keyboardToolbar.sizeToFit()
+        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneBarButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard))
+        keyboardToolbar.items = [flexBarButton, doneBarButton]
+        searchBar.inputAccessoryView = keyboardToolbar
         
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as! UITextField
         textFieldInsideSearchBar.font = Theme.theme.itemListFont
@@ -226,5 +242,23 @@ extension ListView {
         indicator.topAnchor.constraint(equalTo: searchBar.topAnchor, constant: 6).isActive = true
         indicator.widthAnchor.constraint(equalToConstant: 30).isActive = true
         indicator.heightAnchor.constraint(equalToConstant: 5).isActive = true
+    }
+    
+    fileprivate func setupBackgroundView() {
+        backgroundView = UIView(frame: frame)
+        backgroundView.backgroundColor = .red
+        backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapOnBGView)))
+        
+        addSubview(backgroundView)
+        
+        backgroundView.fillSuperview()
+    }
+    
+    @objc fileprivate func handleTapOnBGView() {
+        print("tapped")
+    }
+    
+    @objc fileprivate func dismissKeyboard() {
+        endEditing(true)
     }
 }
