@@ -30,4 +30,11 @@ extension Date {
         let randomDate = Calendar.current.date(from: components)!
         return randomDate
     }
+    
+    func totalMinutes() -> Int {
+        let hours = Calendar.current.component(.hour, from: self)
+        let minutes = Calendar.current.component(.minute, from: self)
+        
+        return (hours*60) + minutes
+    }
 }

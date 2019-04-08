@@ -20,6 +20,7 @@ class ItemViewController: UIViewController {
     var endTimeTextField: UITextField!
     var titleTextView: NamedUITextView!
     var descriptionTextView: NamedUITextView!
+    
     var isDeleted = false
 
     override func viewDidLoad() {
@@ -55,6 +56,19 @@ class ItemViewController: UIViewController {
         if !isDeleted {
             item.title = titleTextView.text
             item.description = descriptionTextView.text
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "hh:mm a"
+            
+            if let startText = startTimeTextField.text {
+                let startDate = dateFormatter.date(from: startText)
+                item.startDate = startDate
+            }
+            if let endText = endTimeTextField.text {
+                let endDate = dateFormatter.date(from: endText)
+                item.endDate = endDate
+            }
+            
             Data.data.allItems[itemIndex] = item
         }
     }
@@ -123,6 +137,32 @@ class ItemViewController: UIViewController {
         endTimeTextField.text = endTime
         endTimeTextField.font = Theme.theme.itemListFont
         
+        let datePicker = UIDatePicker()
+        datePicker.backgroundColor = .white
+        datePicker.datePickerMode = .time
+        datePicker.date = endDate
+        
+        let keyboardToolbar = UIToolbar()
+        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneBarButton = UIBarButtonItem(title: "Hide", style: .plain, target: self, action: #selector(dismissKeyboard))
+        keyboardToolbar.sizeToFit()
+        doneBarButton.setTitleTextAttributes([NSAttributedString.Key.font : Theme.theme.descriptionFont], for: .normal)
+        doneBarButton.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : Theme.theme.itemTextColor], for: .normal)
+        keyboardToolbar.items = [flexBarButton, doneBarButton]
+        keyboardToolbar.barTintColor = .white
+        keyboardToolbar.layer.shadowColor = UIColor.darkGray.cgColor
+        keyboardToolbar.layer.shadowOffset = CGSize(width: 0, height: -3)
+        keyboardToolbar.layer.shadowRadius = 3
+        keyboardToolbar.layer.shadowOpacity = 0.3
+        
+        keyboardToolbar.subviews
+            .filter { $0 is UIImageView }
+            .forEach { $0.isHidden = true }
+        
+        datePicker.addTarget(self, action: #selector(handleEndDatePicker), for: .valueChanged)
+        endTimeTextField.inputAccessoryView = keyboardToolbar
+        endTimeTextField.inputView = datePicker
+        
         view.addSubview(endTimeTextField)
         
         endTimeTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -156,6 +196,33 @@ class ItemViewController: UIViewController {
         startTimeTextField = UITextField()
         startTimeTextField.text = startTime
         startTimeTextField.font = Theme.theme.itemListFont
+        
+        let datePicker = UIDatePicker()
+        datePicker.backgroundColor = .white
+        datePicker.datePickerMode = .time
+        datePicker.date = startDate
+        
+        
+        let keyboardToolbar = UIToolbar()
+        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneBarButton = UIBarButtonItem(title: "Hide", style: .plain, target: self, action: #selector(dismissKeyboard))
+        keyboardToolbar.sizeToFit()
+        doneBarButton.setTitleTextAttributes([NSAttributedString.Key.font : Theme.theme.descriptionFont], for: .normal)
+        doneBarButton.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : Theme.theme.itemTextColor], for: .normal)
+        keyboardToolbar.items = [flexBarButton, doneBarButton]
+        keyboardToolbar.barTintColor = .white
+        keyboardToolbar.layer.shadowColor = UIColor.darkGray.cgColor
+        keyboardToolbar.layer.shadowOffset = CGSize(width: 0, height: -3)
+        keyboardToolbar.layer.shadowRadius = 3
+        keyboardToolbar.layer.shadowOpacity = 0.3
+        
+        keyboardToolbar.subviews
+            .filter { $0 is UIImageView }
+            .forEach { $0.isHidden = true }
+        
+        datePicker.addTarget(self, action: #selector(handleStartDatePicker), for: .valueChanged)
+        startTimeTextField.inputAccessoryView = keyboardToolbar
+        startTimeTextField.inputView = datePicker
         
         view.addSubview(startTimeTextField)
         
@@ -200,6 +267,36 @@ class ItemViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
     }
     
+    @objc fileprivate func handleEndDatePicker(datePicker: UIDatePicker) {
+        let date = datePicker.date
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm a"
+        
+        // make sure its after start Time
+        let startTimeText = startTimeTextField.text!
+        let startDate = dateFormatter.date(from: startTimeText)!
+        
+        if date.totalMinutes() < startDate.totalMinutes() {
+            return
+        }
+        
+        let time = dateFormatter.string(from: date)
+        
+        endTimeTextField.text = time
+    }
+    
+    @objc fileprivate func handleStartDatePicker(datePicker: UIDatePicker) {
+        let date = datePicker.date
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm a"
+        
+        let time = dateFormatter.string(from: date)
+        
+        startTimeTextField.text = time
+    }
+    
     @objc fileprivate func handleTap() {
         view.endEditing(true)
     }
@@ -219,6 +316,10 @@ class ItemViewController: UIViewController {
         Data.data.deleteItem(atIndex: itemIndex)
         
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc fileprivate func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 
