@@ -269,12 +269,12 @@ class ItemViewController: UIViewController {
     }
     
     fileprivate func handleLongPressBegan() {
-        let colorPickerView = ColorPickerView(frame: CGRect(x: 40, y: view.frame.height, width: view.frame.width-80, height: 150))
+        let colorPickerView = ColorPickerView(frame: CGRect(x: 40, y: view.frame.height, width: view.frame.width-80, height: 100))
         
         view.addSubview(colorPickerView)
                 
         UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
-            colorPickerView.transform = CGAffineTransform(translationX: 0, y: -180)
+            colorPickerView.transform = CGAffineTransform(translationX: 0, y: -130)
         }, completion: nil)
     }
     
