@@ -20,6 +20,7 @@ class ItemViewController: UIViewController {
     var endTimeTextField: UITextField!
     var titleTextView: NamedUITextView!
     var descriptionTextView: NamedUITextView!
+    var colorPickerView: ColorPickerView!
     
     var isDeleted = false
 
@@ -42,6 +43,8 @@ class ItemViewController: UIViewController {
         setupTitle()
         setupDescription()
         
+        setupColorPicker()
+        
         // Delete Option
         // Right Bar Button Item?
         setupDeleteButton()
@@ -50,6 +53,7 @@ class ItemViewController: UIViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         view.addGestureRecognizer(tapGesture)
+        view.addGestureRecognizer(UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe)))
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -69,6 +73,8 @@ class ItemViewController: UIViewController {
                 item.endDate = endDate
             }
             
+            item.color = colorPickerView.selectedColor
+            
             Data.data.allItems[itemIndex] = item
         }
     }
@@ -77,6 +83,13 @@ class ItemViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete Item", style: .plain, target: self, action: #selector(handleDelete))
         
+    }
+    
+    fileprivate func setupColorPicker() {
+        colorPickerView = ColorPickerView(frame: CGRect(x: 40, y: view.frame.height, width: view.frame.width-80, height: 100))
+        colorPickerView.delegate = self
+        colorPickerView.selectedColor = item.color
+        view.addSubview(colorPickerView)
     }
     
     fileprivate func setupDescription() {
@@ -268,13 +281,26 @@ class ItemViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
     }
     
+    func updateColor(color: String) {
+        colorIcon.setAnimation(named: "ItemCompletionAnimation_\(color)")
+        if item.isDone {
+            colorIcon.animationProgress = 1
+            print(item.isDone)
+        } else {
+            colorIcon.animationProgress = 0
+        }
+    }
+    
+    func hideColorPicker() {
+        print("Hiding")
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+            self.colorPickerView.transform = .identity
+        }, completion: nil)
+    }
+    
     fileprivate func handleLongPressBegan() {
-        let colorPickerView = ColorPickerView(frame: CGRect(x: 40, y: view.frame.height, width: view.frame.width-80, height: 100))
-        
-        view.addSubview(colorPickerView)
-                
-        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
-            colorPickerView.transform = CGAffineTransform(translationX: 0, y: -130)
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+            self.colorPickerView.transform = CGAffineTransform(translationX: 0, y: -130)
         }, completion: nil)
     }
     
@@ -345,6 +371,10 @@ class ItemViewController: UIViewController {
     
     @objc fileprivate func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    @objc fileprivate func handleSwipe() {
+        hideColorPicker()
     }
 }
 

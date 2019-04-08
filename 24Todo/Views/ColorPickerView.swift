@@ -15,6 +15,26 @@ class ColorPickerView: UIView {
     
     var colorButtons = [UIButton]()
     
+    weak var delegate: ItemViewController?
+    
+    var selectedColor: String! {
+        didSet {
+            for button in colorButtons {
+                if button.backgroundColor == Theme.theme.colorMap[selectedColor] {
+                    button.layer.shadowColor = UIColor.black.cgColor
+                    button.layer.shadowOffset = CGSize(width: 0, height: 5)
+                    button.layer.shadowRadius = 7
+                    button.layer.shadowOpacity = 0.5
+                } else {
+                    button.layer.shadowOffset = CGSize(width: 0 , height: 0)
+                    button.layer.shadowColor = UIColor.clear.cgColor
+                    button.layer.shadowRadius = 0.0
+                    button.layer.shadowOpacity = 0.00
+                }
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -22,6 +42,8 @@ class ColorPickerView: UIView {
         setupView()
         setupLabel()
         setupColorButtons()
+        
+        addGestureRecognizer(UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe)))
     }
     
     fileprivate func setupColorButtons() {
@@ -34,7 +56,7 @@ class ColorPickerView: UIView {
         for color in Theme.theme.colorMap.keys {
             
             let button = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-            button.setTitle("", for: .normal)
+            button.setTitle("\(color)", for: .disabled)
             button.backgroundColor = Theme.theme.colorMap[color]!
             button.layer.cornerRadius = 15
             button.addTarget(self, action: #selector(handleColorButtonTapped), for: .touchUpInside)
@@ -55,7 +77,7 @@ class ColorPickerView: UIView {
     
     fileprivate func setupLabel() {
         label = UILabel()
-        label.text = "Pick a color"
+        label.text = "Change color"
         label.font = Theme.theme.titleFont
         label.textColor = Theme.theme.titleTextColor
         
@@ -76,7 +98,19 @@ class ColorPickerView: UIView {
     }
     
     @objc fileprivate func handleColorButtonTapped(sender: UIButton) {
-        print(sender.backgroundColor)
+        selectedColor = sender.title(for: .disabled)!
+        delegate?.updateColor(color: selectedColor)
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(hide), userInfo: nil, repeats: false)
+    }
+    
+    @objc fileprivate func hide() {
+        delegate?.hideColorPicker()
+    }
+    
+    @objc fileprivate func handleSwipe(swipe: UISwipeGestureRecognizer) {
+        if swipe.direction == .down {
+            delegate?.hideColorPicker()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
