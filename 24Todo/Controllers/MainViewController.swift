@@ -191,7 +191,7 @@ extension MainViewController {
             if navigationItem.title != "Today" {
                 animateTitle(newTitle: "Today")
             }
-            dayView.setupCurrentTimeView()
+            dayView.updateCurrentTimeView()
         }
         
         let bottomBarrier: CGFloat = 140

@@ -31,6 +31,7 @@ class DayView: UIView {
         loadItems()
         setupCollectionView()
         setupShadowView()
+        setupCurrentTimeView()
         //setupCurrentTimeView()
         checkCalendarAuthorizationStatus()
     }
@@ -138,6 +139,15 @@ extension DayView {
     }
     
     func setupCurrentTimeView() {
+        currentTimeView = UIView(frame: CGRect(x: -10, y: -100, width: 45, height: CGFloat(10)))
+        currentTimeView.backgroundColor = Theme.theme.titleTextColor
+        currentTimeView.alpha = 0.3
+        currentTimeView.layer.cornerRadius = 10
+        
+        collectionView.addSubview(currentTimeView)
+    }
+    
+    func updateCurrentTimeView() {
         
         let currentDate = Date()
         let currentHour = Calendar.current.component(.hour, from: currentDate)
@@ -154,12 +164,7 @@ extension DayView {
             scrollOffset = 100
         }
         
-        currentTimeView = UIView(frame: CGRect(x: -10, y: CGFloat(currentTime), width: 45, height: CGFloat(10)))
-        currentTimeView.backgroundColor = Theme.theme.titleTextColor
-        currentTimeView.alpha = 0.3
-        currentTimeView.layer.cornerRadius = 10
-        
-        collectionView.addSubview(currentTimeView)
+        currentTimeView.frame = CGRect(x: -10, y: CGFloat(currentTime), width: 45, height: CGFloat(10))        
         collectionView.setContentOffset(CGPoint(x: 0, y: scrollOffset - 100), animated: true)
 //        collectionView.scrollRectToVisible(currentTimeView.frame, animated: true)
     }
