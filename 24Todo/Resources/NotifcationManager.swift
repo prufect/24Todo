@@ -44,7 +44,6 @@ class NotificationManager {
         let requestIdentifier = item.id.uuidString
         let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger)
         
-        print("Scheduled for ", item.startDate)
         center.add(request, withCompletionHandler: nil)
     }
     
