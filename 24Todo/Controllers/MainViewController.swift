@@ -60,9 +60,9 @@ class MainViewController: UIViewController {
     func pushItemViewController(withItem item : Item) {
         let itemViewController = ItemViewController()
         itemViewController.item = item
+        itemViewController.dayView = dayView
         navigationController?.pushViewController(itemViewController, animated: true)
     }
-
 }
 
 // MARK: - HandleFunctions

@@ -32,7 +32,6 @@ class DayView: UIView {
         setupCollectionView()
         setupShadowView()
         setupCurrentTimeView()
-        //setupCurrentTimeView()
         checkCalendarAuthorizationStatus()
     }
     
@@ -244,6 +243,14 @@ extension DayView {
         self.calendars = eventStore.calendars(for: EKEntityType.event)
         loadEventsForDay()
         collectionView.reloadData()
+    }
+    
+    func removeItem(with uuid: UUID) {
+        if let index = items.firstIndex(where: { (item) -> Bool in
+            item.id == uuid
+        }) {
+            self.items.remove(at: index)
+        }
     }
 }
 

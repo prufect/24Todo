@@ -24,7 +24,7 @@ class ItemViewController: UIViewController {
     
     var descriptionTextViewBottomAnchor: NSLayoutConstraint!
     
-//    let descriptionTextViewBottomAnchor: Anchro
+    weak var dayView: DayView?
     
     var isDeleted = false
 
@@ -74,22 +74,7 @@ class ItemViewController: UIViewController {
         if !isDeleted {
             item.title = titleTextView.text
             item.description = descriptionTextView.text
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "hh:mm a"
-            
-//            if let startText = startTimeTextField.text {
-//                let startDate = dateFormatter.date(from: startText)
-//                item.startDate = startDate
-//            }
-//
-//            if let endText = endTimeTextField.text {
-//                let endDate = dateFormatter.date(from: endText)
-//                item.endDate = endDate
-//            }
-            
             item.color = colorPickerView.selectedColor
-            
             Data.data.allItems[itemIndex] = item
         }
     }
@@ -385,7 +370,7 @@ class ItemViewController: UIViewController {
     @objc fileprivate func handleDelete() {
         isDeleted = true
         Data.data.deleteItem(atIndex: itemIndex)
-        
+        dayView?.removeItem(with: item.id)
         navigationController?.popViewController(animated: true)
     }
     
