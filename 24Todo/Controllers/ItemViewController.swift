@@ -347,6 +347,14 @@ class ItemViewController: UIViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm a"
         
+        // make sure its after start Time
+        let endTimeText = endTimeTextField.text!
+        let endDate = dateFormatter.date(from: endTimeText)!
+        
+        if date.totalMinutes() > endDate.totalMinutes() {
+            return
+        }
+        
         let time = dateFormatter.string(from: date)
         
         item.startDate = date

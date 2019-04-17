@@ -12,7 +12,12 @@ class Item: Equatable, Codable {
     let id: UUID
     var title: String
     var description: String?
-    var startDate: Date?
+    var startDate: Date? {
+        didSet {
+            NotificationManager.shared.removeNotification(forItem: self)
+            NotificationManager.shared.scheduleNotification(forItem: self)
+        }
+    }
     var endDate: Date?
     var isDone: Bool = false
     var isEvent: Bool = false

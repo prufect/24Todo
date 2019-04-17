@@ -50,6 +50,7 @@
 		A471E01E224F146D00AA30B0 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = A471E01D224F146D00AA30B0 /* Notifications.swift */; };
 		A471E020224F186300AA30B0 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A471E01F224F186300AA30B0 /* ItemView.swift */; };
 		A471E0222251ADC500AA30B0 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A471E0212251ADC500AA30B0 /* DayView.swift */; };
+		A4880DDF2266B41A00C06FB5 /* NotifcationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4880DDE2266B41A00C06FB5 /* NotifcationManager.swift */; };
 		A4FC5DE22256CFDA007E6542 /* UIimageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FC5DDF2256CFDA007E6542 /* UIimageView.swift */; };
 		A4FC5DE32256CFDA007E6542 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FC5DE02256CFDA007E6542 /* UIView.swift */; };
 		A4FC5DE42256CFDA007E6542 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FC5DE12256CFDA007E6542 /* UIColor.swift */; };
@@ -127,6 +128,7 @@
 		A471E01D224F146D00AA30B0 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		A471E01F224F186300AA30B0 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		A471E0212251ADC500AA30B0 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
+		A4880DDE2266B41A00C06FB5 /* NotifcationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifcationManager.swift; sourceTree = "<group>"; };
 		A4FC5DDF2256CFDA007E6542 /* UIimageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIimageView.swift; sourceTree = "<group>"; };
 		A4FC5DE02256CFDA007E6542 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		A4FC5DE12256CFDA007E6542 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 			children = (
 				A429A659225AD51800C4AB81 /* Data.swift */,
 				A429A617225971AF00C4AB81 /* Theme.swift */,
+				A4880DDE2266B41A00C06FB5 /* NotifcationManager.swift */,
 				A429A6452259B1D400C4AB81 /* Animations */,
 				A429A5F22259707700C4AB81 /* Fonts */,
 			);
@@ -613,6 +616,7 @@
 				A4FC5DE32256CFDA007E6542 /* UIView.swift in Sources */,
 				A429A5E82259056A00C4AB81 /* CustomCalendarDayLayout.swift in Sources */,
 				A471E020224F186300AA30B0 /* ItemView.swift in Sources */,
+				A4880DDF2266B41A00C06FB5 /* NotifcationManager.swift in Sources */,
 				A429A65A225AD51800C4AB81 /* Data.swift in Sources */,
 				A471E0222251ADC500AA30B0 /* DayView.swift in Sources */,
 				A429A5EA22593D8800C4AB81 /* HourDecorationView.swift in Sources */,

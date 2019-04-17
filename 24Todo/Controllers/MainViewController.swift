@@ -28,6 +28,7 @@ class MainViewController: UIViewController {
         setupListView()
         setupDragView()
         setupGestureRecognizers()
+        NotificationManager.shared.requestNotificationAuthorization()
     }
     
     override func viewWillAppear(_ animated: Bool) {

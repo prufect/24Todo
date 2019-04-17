@@ -38,6 +38,9 @@ class DayView: UIView {
     func dropItemAt(location: CGPoint, item: Item, withSetLength length: Int?) {
         
         let item = item
+        var dateComponents = DateComponents()
+        
+        dateComponents = Calendar.current.dateComponents([.day, .month, .minute, .year], from: Date())
         
         // Create Times for Event Based on Drag Location
         var dropTime = Int(location.y) - 30
@@ -49,9 +52,9 @@ class DayView: UIView {
         //print("DropMinute", minute)
         let hour = Int(dropTime / 60)
         //print("DropHour", hour)
-        let day = 4
-        let month = 4
-        let year = 2019
+        let day = dateComponents.day
+        let month = dateComponents.month
+        let year = dateComponents.year
         
         var components = DateComponents()
         components.year = year
